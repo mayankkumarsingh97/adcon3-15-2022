@@ -1,0 +1,1737 @@
+{% block content %}
+{% load crispy_forms_tags %}
+{% load static %}
+<style>
+   .inputEn {
+   outline: 0;
+   border-width: 0 0 1px;
+   border-color: #495057;
+   width: 110px;
+   margin-top:10px
+   }
+   .inputRn {
+   outline: 0;
+   border-width: 0 0 1px;
+   border-color: #495057;
+   width: 185px;
+   margin-top:10px
+   }
+   .inputAdjust{
+   width: 210px;
+   }
+</style>
+<style>
+   input {
+   outline: 0;
+   border-width: 0 0 1.2px;
+   border-color: #d2d2d2;
+   }
+   input:focus {
+   border-color: #ff397c
+   }
+   .inbox_length{
+   width: 651px;
+   margin-left: 14px;
+   }
+   #obsS{
+   border:none;
+   }
+   #nomS{
+   border:none;
+   width: 54px;
+   }
+</style>
+<div class="content">
+   <div class="container-fluid">
+      <div class="row">
+         <div class="card ">
+            <div class="card-header card-header-rose card-header-icon">
+               <div class="card-icon">
+                  <i class="material-icons">mail_outline</i>
+               </div>
+               <h4 class="card-title">Calibration Weighing Balance</h4>
+            </div>
+            <div class="card-body ">
+               <div class="row">
+                  <div class="col-md-12">
+                     <div class="card-body ">
+                        <div class="well clearfix">
+                           <!-- <a class="btn pull-right add-record btn-success text-white" data-added="0">Add Observation Record</a> -->
+                        </div>
+                        <div class="row">
+                           <div class="col-sm-6">
+                              <div class="form-group">
+                            
+                              </div>
+                           </div>
+                           <div class="col-sm-6">
+                              <div class="form-group">
+                                 
+                              </div>
+                           </div>
+                           <div class="col-sm-4">
+                              <div class="form-group">
+                                
+                              </div>
+                           </div>
+                           <div class="col-sm-4">
+                              <div class="form-group">
+                                
+                              </div>
+                           </div>
+                           <div class="col-sm-4" style="user-select: auto;">
+                              <div class="form-group" style="user-select: auto;">
+                                 <div id="div_id_humidity" class="form-group bmd-form-group" style="user-select: auto;">
+                                    <label for="least_count" class="bmd-label-static" style="user-select: auto;">
+                                    Least Count
+                                    </label>
+                                    <div class="" style="user-select: auto;">
+                                       <input type="text" name="least_count" class="form-control textinput textInput least_count mkkkkk" id="least_count" style="user-select: auto;" value="{{obserItem2.least_count}}">
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        
+                        <table class="table table-bordered" id="tbl_posts">
+                           <thead>
+                              <tr>
+                                 <th>S.No.</th>
+                                 <th class="text-center">{{primary_intru}} Nominal Value in<input class="font-weight-bold" id="nomS" disabled value=""></th>
+                                 <th>Unit Used</th>
+                                 <th class="text-center">
+                                    {{secondry_intru}} Actual Values Observed in <input class="font-weight-bold obsS" id="obsS" disabled value="">
+                                    <table style="border:none; width: 100%;">
+                                       <thead>
+                                          <tr>
+                                             <td>X1</td>
+                                             <td>X2</td>
+                                             <td>X3</td>
+                                             <td>X4</td>
+                                          </tr>
+                                       </thead>
+                                    </table>
+                                 <th>Unit Used</th>
+                                 </th>
+                                 <th>Average in</th>
+                                 <th>Uncertainty</th>
+                                 <th>Action</th>
+                              </tr>
+                           </thead>
+                           <tfoot>
+                           </tfoot>
+                           {% for item in obserItem %}
+                           <tbody id="tbl_posts_body">
+                             
+                              <tr id="rec-1" class="item apme">
+                                 <td class="sno"><span class="sn">1</span>.</td>
+                                 <td class="instr" >
+                                    <div class="coolAddress">
+                                      <div>
+                                          
+                                            {{item.master_weight_item.all}}
+                                          
+
+                                        
+
+                                      </div>
+                                    </div>
+                                 </td>
+                                 <td>
+                                    <select class="form-control nomUnit" data-style="btn btn-link" >
+                                       {% for m, n in weighing_unit %}
+                                       <option value="{{m}}">{{n}}</option>
+                                       {% endfor %}
+                                    </select>
+                                 </td>
+                                 <td class="obsin">
+                                    <table width="100%">
+                                       <tr>
+                                          <td>{{ item.observation_1 }}</td>
+                                          <td>{{ item.observation_2 }}</td>
+                                          <td>{{ item.observation_3 }}</td>
+                                          <td>{{ item.observation_4 }}</td>
+                                       </tr>
+                                    </table>
+                                 </td>
+                                 <td>
+                                    <select class="form-control obsUnit" data-style="btn btn-link" >
+                                       {% for m, n in weighing_unit %}
+                                       <option value="{{m}}">{{n}}</option> 
+                                       {% endfor %}
+                                    </select>
+                                 </td>
+                                 <td><input class="form-control totalE" disabled value="{{obserItem.first.avg}}"></td>
+                                 <td><input type="number" disabled class="uncertainP form-control" value="0"> </input></td>
+                                 <td><a class="btn btn-xs delete-record btn-rose btn-link" data-id="1">X</a></td>
+                              </tr>
+                              
+                           </tbody>
+                           {% endfor %}
+                        </table>
+                        <div class="row">
+                           <div class="col-sm-12">
+                              <div class="form-group bmd-form-group">
+                                 <div id="div_id_remarks" class="control-group">
+                                    <label for="id_remarks" class="control-label ">
+                                    Remarks
+                                    </label>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="card-footer text-right">
+                        <div class="col-sm-12">
+                           <!-- <button type="button" id="fetchButton" class="btn btn-rose fetchButton">fetch</button>
+                           <button type="button" id="subMButt2" class="btn btn-rose">Submit</button>
+                           <button type="button" id="saveObs" class="btn btn-rose">Save</button> -->
+                        </div>
+                     </div>
+                     <div style="display:none;">
+                        <table id="sample_table">
+                          
+                           <tr id="" class="item">
+                              <td class="sno"> <span class="sn">1</span>.</td>
+                               <td class="instr" >
+                                    <div class="coolAddress">
+                                       <h2></h2>
+                                    </div>
+                                 </td>
+                              <td>
+                                 <select class="form-control nomUnit" data-style="btn btn-link" >
+                                    {% for m, n in weighing_unit %}
+                                    <option value="{{m}}">{{n}}</option>
+                                    {% endfor %}
+                                 </select>
+                              </td>
+                              <td class="obsin">
+                                 <table>
+                                    <tr>
+                                       <td>{{ observIt.observation_1 }}</td>
+                                       <td>{{ observIt.observation_2 }}</td>
+                                       <td>{{ observIt.observation_3 }}</td>
+                                       <td>{{ observIt.observation_4 }}</td>
+                                    </tr>
+                                 </table>
+                              </td>
+                              <td>
+                                 <select class="form-control obsUnit" data-style="btn btn-link" >
+                                    {% for m, n in weighing_unit %}
+                                    <option value="{{m}}">{{n}}</option>
+                                    {% endfor %}
+                                 </select>
+                              </td>
+                              <td><input class="form-control totalE" disabled value="0"></td>
+                              <!-- <td><input type="number" disabled class="totalE form-control" value=0> </input></td> -->
+                              <td> <input type="number" disabled class="uncertainP form-control" value=0> </input>  </td>
+                              <!--                                          <td> <input type="number" disabled class="errorE form-control" value=0> </input>  </td>-->
+                              <td><a class="btn btn-xs delete-record btn-rose btn-link" data-id="1">X</a></td>
+                           </tr>
+                          
+                        </table>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+            <div class="row">
+         <div class="card ">
+            <div class="card-body ">
+              
+               <div class="row">
+                  <p class="border title" style="border-width:20px; margin-left:35px;">&nbsp;&nbsp;<b>Eccentricity Loading</b>&nbsp;&nbsp;
+                  </p>
+                  <div class="col-md-12" style="margin-top:-40px;">
+                     <div class="card-body ">
+                        <table class="table table-bordered" id="tbl_posts">
+                           <thead>
+                              <tr>
+                                 <th>Load</th>
+                                 <th>Load Unit</th>
+                                 <th class="text-center">Location
+                                 </th>
+                                 <th class="text-center">Measured Value on Balance
+                                 </th>
+                                 <th class="text-center">Mean Value</th>
+                                 <th>Diff. (H) of values w.r.t M1</th>
+                              </tr>
+                           </thead>
+                           <tfoot>
+                           </tfoot>
+                           <tbody id="tbl_posts_body">
+
+                              <tr id="rec-1" class="mainitem">
+                                 <td><input class="form-control stdv eccentricity_loading"  value="{{obserItem2.eccentricity_loading}}"></td>
+                                 <td>
+                                    <select class="text-center form-control eccentricityUnit" data-style="btn btn-link" >
+                                       {% for m, n in weighing_unit %}
+                                       <option value="{{m}}">{{n}}</option>
+                                       {% endfor %}
+                                    </select>
+                                 </td>
+                                 <td>
+                                    <table>
+                                       <tr>
+                                          <td>
+                                             <table>
+                                                <tr>
+                                                   <td>
+                                                      <input id="obs1" disabled class="form-control obsNM obs11" value="1">
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                      <input id="obs1" disabled class="form-control obsNM obs12" value="2">
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                      <input id="obs1" disabled class="form-control obsNM obs13" value="3">
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                      <input id="obs1" disabled class="form-control obsNM obs14" value="4">
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                      <input id="obs1" disabled class="form-control obsNM obs15" value="5">
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                      <input id="obs1" disabled class="form-control obsNM obs15" value="1">
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                      <input id="obs1" disabled class="form-control obsNM obs15" value="5">
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                      <input id="obs1" disabled class="form-control obsNM obs15" value="4">
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                      <input id="obs1" disabled class="form-control obsNM obs15" value="3">
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                      <input id="obs1" disabled class="form-control obsNM obs15" value="2">
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                      <input id="obs1" disabled class="form-control obsNM obs15" value="1">
+                                                   </td>
+                                                </tr>
+                                             </table>
+                                          </td>
+                                       </tr>
+                                    </table>
+                                 </td>
+                                 <td>
+                                    <table>
+                                       <tr>
+                                          <td>
+                                             <table class="vee">
+                                                <tr>
+                                                   <td>
+                                                      <input id="obs1"  class="form-control EL E1" value="{{obserItem2.E1}}">
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                      <input id="obs1"  class="form-control EL E2" value="{{obserItem2.E2}}">
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                      <input id="obs1"  class="form-control EL E3" value="{{obserItem2.E3}}">
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                      <input id="obs1"  class="form-control EL E4" value="{{obserItem2.E4}}">
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                      <input id="obs1"  class="form-control EL E5" value="{{obserItem2.E5}}">
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                      <input id="obs1"  class="form-control EL E6" value="{{obserItem2.E6}}">
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                      <input id="obs1"  class="form-control EL E7" value="{{obserItem2.E7}}">
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                      <input id="obs1"  class="form-control EL E8" value="{{obserItem2.E8}}">
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                      <input id="obs1"  class="form-control EL E9" value="{{obserItem2.E9}}">
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                      <input id="obs1"  class="form-control EL E10" value="{{obserItem2.E10}}">
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                      <input id="obs1"  class="form-control EL E11" value="{{obserItem2.E11}}">
+                                                   </td>
+                                                </tr>
+                                             </table>
+                                          </td>
+                                       </tr>
+                                    </table>
+                                 </td>
+                                 <td class="obsin inpn">
+                                    <table>
+                                       <tr>
+                                          <td>
+                                             <table>
+                                                <tr>
+                                                   <td>
+                                                      Location1, M1 =
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                      Location2, M2 =
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                      Location3, M3 =
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                      Location4, M4 =
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                      Location5, M5 =
+                                                   </td>
+                                                </tr>
+                                             </table>
+                                          </td>
+                                          <td>
+                                             <table class="vee">
+                                                <tr>
+                                                   <td>
+                                                      <input id="obs1" class="form-control obsNM obs21" value="{{obserItem2.mean.Lmen1}}">
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                      <input id="obs1" class="form-control obsNM obs22" value="{{obserItem2.mean.Lmen2}}">
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                      <input id="obs1" class="form-control obsNM obs23" value="{{obserItem2.mean.Lmen3}}">
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                      <input id="obs1" class="form-control obsNM obs24" value="{{obserItem2.mean.Lmen4}}">
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                      <input id="obs1" class="form-control obsNM obs25" value="{{obserItem2.mean.Lmen5}}">
+                                                   </td>
+                                                </tr>
+                                             </table>
+                                          </td>
+                                       </tr>
+                                    </table>
+                                 </td>
+                                 <td class="obsin inpn">
+                                    <table>
+                                       <tr>
+                                          <td>
+                                             <table>
+                                                <tr>
+                                                   <td>
+                                                      H1 = M1-M2
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                      H2 = M1-M3
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                      H3 = M1-M4
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                      H4 = M1-M5
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <!-- <td>
+                                                      H5 = M1-M5
+                                                   </td> -->
+                                                </tr>
+                                             </table>
+                                          </td>
+                                          <td>
+                                             <table>
+                                                <tr>
+                                                   <td>
+                                                      <input id="obs1" disabled class="form-control obsNM obsdiff21" value="{{obserItem2.mean.h1}}">
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                      <input id="obs1" disabled class="form-control obsNM obsdiff22" value="{{obserItem2.mean.h2}}">
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                      <input id="obs1" disabled class="form-control obsNM obsdiff23" value="{{obserItem2.mean.h3}}">
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <td>
+                                                      <input id="obs1" disabled class="form-control obsNM obsdiff24" value="{{obserItem2.mean.h4}}">
+                                                   </td>
+                                                </tr>
+                                                <tr>
+                                                   <!-- <td>
+                                                      <input id="obs1" class="form-control obsNM obs25" value="">
+                                                   </td> -->
+                                                </tr>
+                                             </table>
+                                          </td>
+                                       </tr>
+                                    </table>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                        <div class="row">
+                           <div class="col-sm-12">
+                              <div class="form-group bmd-form-group">
+                                 <div id="div_id_remarks" class="control-group">
+
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               
+            </div>
+         </div>
+      </div>
+
+      <div class="row">
+         <div class="card ">
+            <div class="card-body ">
+               <div class="row">
+                  <p class="border title" style="border-width:20px; margin-left:35px;">&nbsp;&nbsp;<b>Half Load</b>&nbsp;&nbsp;
+                  <table>
+                     <td> <input class="halfload_value"></td>
+                     <td>
+                        <select class="form-control halfloadUnit" data-style="btn btn-link" >
+                           {% for m, n in weighing_unit %}
+                           <option value="{{m}}">{{n}}</option>
+                           {% endfor %}
+                        </select>
+                     </td>
+                  </table>
+                  </p>
+                  
+                  <div class="col-md-12" style="margin-top:-40px;">
+                     <div class="card-body ">
+                        <table class="table table-bordered" id="tbl_posts">
+                           <thead class="text-center">
+                              <tr>
+                                 <th>S.No.</th>
+                                 <th>Reading in Weighing<br> Balance at No Load (Z)</th>
+                                 <th>Reading in Weighing<br> Balance at Half Load (R)</th>
+                                 <th>X=R-Z</th>
+                                 <th>(Repeatability/Standard Deviation at Half Load)</th>
+                                 <!-- <th>Error UUC-Std </th> -->
+                              </tr>
+                           </thead>
+                           <tfoot>
+                           </tfoot>
+                           <tbody id="tbl_posts_body" class="HRitem">
+                              <tr id="rec-1" class="item text-center">
+                                 <td class="sno">1.</td>
+                                 <td><input type="number" class="HR1 inputEn Hn" value="{{obserItem2.HR1}}"></td>
+                                 <td><input type="number" class="HR11 inputEn Hn" value="{{obserItem2.HR11}}"></td>
+                                 <td><input type="number" disabled value="{{obserItem2.DiffHalfLoad.hd1}}" class="Ec inputEn diffhr1"></td>
+                                 <td></td>
+                              </tr>
+                              <tr id="rec-1" class="item text-center">
+                                 <td class="sno">2.</td>
+                                 <td><input type="number" class="HR2 inputEn Hn" value="{{obserItem2.HR2}}"></td>
+                                 <td><input type="number" class="HR12 inputEn Hn" value="{{obserItem2.HR12}}"></td>
+                                 <td><input type="number" disabled class="Ec inputEn diffhr2" value="{{obserItem2.DiffHalfLoad.hd2}}"></td>
+                                 <td></td>
+                              </tr>
+                              <tr id="rec-1" class="item text-center">
+                                 <td class="sno">3.</td>
+                                 <td><input type="number" class="HR3 inputEn Hn" value="{{obserItem2.HR3}}"></td>
+                                 <td><input type="number" class="HR13 inputEn Hn" value="{{obserItem2.HR13}}"></td>
+                                 <td><input type="number" disabled class="Ec inputEn diffhr3" value="{{obserItem2.DiffHalfLoad.hd3}}"></td>
+                                 <td></td>
+                              </tr>
+                              <tr id="rec-1" class="item text-center">
+                                 <td class="sno">4.</td>
+                                 <td><input type="number" class="HR4 inputEn Hn" value="{{obserItem2.HR4}}"></td>
+                                 <td><input type="number" class="HR14 inputEn Hn" value="{{obserItem2.HR14}}"></td>
+                                 <td><input type="number" disabled class="Ec inputEn diffhr4" value="{{obserItem2.DiffHalfLoad.hd4}}"></td>
+                                 <td></td>
+                              </tr>
+                              <tr id="rec-1" class="item text-center">
+                                 <td class="sno">5.</td>
+                                 <td><input type="number" class="HR5 inputEn Hn" value="{{obserItem2.HR5}}"></td>
+                                 <td><input type="number" class="HR15 inputEn Hn" value="{{obserItem2.HR15}}"></td>
+                                 <td><input type="number" disabled class="Ec inputEn diffhr5" value="{{obserItem2.DiffHalfLoad.hd5}}"></td>
+                                 <td class="text-center"><input id="diFF" type="number" disabled class="errorE text-center form-control" value=0> </input></td>
+                              </tr>
+                              <tr id="rec-1" class="item text-center">
+                                 <td class="sno">6.</td>
+                                 <td><input type="number" class="HR6 inputEn Hn" value="{{obserItem2.HR6}}"></td>
+                                 <td><input type="number" class="HR16 inputEn Hn" value="{{obserItem2.HR16}}"></td>
+                                 <td><input type="number" disabled class="Ec inputEn diffhr6" value="{{obserItem2.DiffHalfLoad.hd6}}"></td>
+                                 <td></td>
+                              </tr>
+                              <tr id="rec-1" class="item text-center">
+                                 <td class="sno">7.</td>
+                                 <td><input type="number" class="HR7 inputEn Hn" value="{{obserItem2.HR7}}"></td>
+                                 <td><input type="number" class="HR17 inputEn Hn" value="{{obserItem2.HR17}}"></td>
+                                 <td><input type="number" disabled class="Ec inputEn diffhr7" value="{{obserItem2.DiffHalfLoad.hd7}}"></td>
+                                 <td></td>
+                              </tr>
+                              <tr id="rec-1" class="item text-center">
+                                 <td class="sno">8.</td>
+                                 <td><input type="number" class="HR8 inputEn Hn" value="{{obserItem2.HR8}}"></td>
+                                 <td><input type="number" class="HR18 inputEn Hn" value="{{obserItem2.HR18}}"></td>
+                                 <td><input type="number" disabled class="Ec inputEn diffhr8" value="{{obserItem2.DiffHalfLoad.hd8}}"></td>
+                                 <td></td>
+                              </tr>
+                              <tr id="rec-1" class="item text-center">
+                                 <td class="sno">9.</td>
+                                 <td><input type="number" class="HR9 inputEn Hn" value="{{obserItem2.HR9}}"></td>
+                                 <td><input type="number" class="HR19 inputEn Hn" value="{{obserItem2.HR19}}"></td>
+                                 <td><input type="number" disabled class="Ec inputEn diffhr9" value="{{obserItem2.DiffHalfLoad.hd9}}"></td>
+                                 <td></td>
+                              </tr>
+                              <tr id="rec-1" class="item text-center">
+                                 <td class="sno">10.</td>
+                                 <td><input type="number" class="HR10 inputEn Hn" value="{{obserItem2.HR10}}"></td>
+                                 <td><input type="number" class="HR20 inputEn Hn" value="{{obserItem2.HR20}}"></td>
+                                 <td><input type="number" disabled class="Ec inputEn diffhr10" value="{{obserItem2.DiffHalfLoad.hd10}}"></td>
+                                 <td></td>
+                              </tr>
+                           </tbody>
+                        </table>
+                        <div class="row">
+                           <div class="col-sm-12">
+                              <div class="form-group bmd-form-group">
+                                 <div id="div_id_remarks" class="control-group">
+
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="card ">
+            <div class="card-body ">
+               <div class="row">
+                  <p class="border title" style="border-width:20px; margin-left:35px;">&nbsp;&nbsp;<b>Full Load</b>&nbsp;&nbsp;
+                  <table>
+                     <td> <input class="fulload_value" ></td>
+                     <td>
+                        <select class="form-control fullloadUnit" data-style="btn btn-link" >
+                           {% for m, n in weighing_unit %}
+                           <option value="{{m}}">{{n}}</option>
+                           {% endfor %}
+                        </select>
+                     </td>
+                  </table>
+                  </p>
+                  <div class="col-md-12" style="margin-top:-40px;">
+                     <div class="card-body ">
+                        <table class="table table-bordered" id="tbl_posts">
+                           <thead class="text-center">
+                              <tr>
+                                 <th>S.No.</th>
+                                 <th>Reading in Weighing<br> Balance at No Load (Z)</th>
+                                 <th>Reading in Weighing<br> Balance at Full Load (R)</th>
+                                 <th>X=R-Z</th>
+                                 <th>(Repeatability/Standard Deviation at Full Load)</th>
+                                 <!-- <th>Error UUC-Std </th> -->
+                              </tr>
+                           </thead>
+                           <tfoot>
+                           </tfoot>
+                           <tbody id="tbl_posts_body" class="FRitem">
+                              <tr id="rec-1" class="item text-center">
+                                 <td class="sno">1.</td>
+                                 <td><input type="number" class="FR1 inputEn Fn" value="{{obserItem2.FR1}}"></td>
+                                 <td><input type="number" class="FR11 inputEn Fn" value="{{obserItem2.FR11}}"></td>
+                                 <td><input type="number" disabled class="Ec inputEn diff_fr1" value="{{obserItem2.DiffFullLoad.fd1}}"></td>
+                                 <td></td>
+                              </tr>
+                              <tr id="rec-1" class="item text-center">
+                                 <td class="sno">2.</td>
+                                 <td><input type="number" class="FR2 inputEn Fn" value="{{obserItem2.FR2}}"></td>
+                                 <td><input type="number" class="FR12 inputEn Fn" value="{{obserItem2.FR12}}"></td>
+                                 <td><input type="number" disabled class="Ec inputEn diff_fr2" value="{{obserItem2.DiffFullLoad.fd2}}"></td>
+                                 <td></td>
+                              </tr>
+                              <tr id="rec-1" class="item text-center">
+                                 <td class="sno">3.</td>
+                                 <td><input type="number" class="FR3 inputEn Fn" value="{{obserItem2.FR3}}"></td>
+                                 <td><input type="number" class="FR13 inputEn Fn" value="{{obserItem2.FR13}}"></td>
+                                 <td><input type="number" disabled class="Ec inputEn diff_fr3" value="{{obserItem2.DiffFullLoad.fd3}}"></td>
+                                 <td></td>
+                              </tr>
+                              <tr id="rec-1" class="item text-center">
+                                 <td class="sno">4.</td>
+                                 <td><input type="number" class="FR4 inputEn Fn" value="{{obserItem2.FR4}}"></td>
+                                 <td><input type="number" class="FR14 inputEn Fn" value="{{obserItem2.FR14}}"></td>
+                                 <td><input type="number" disabled class="Ec inputEn diff_fr4" value="{{obserItem2.DiffFullLoad.fd4}}"></td>
+                                 <td></td>
+                              </tr>
+                              <tr id="rec-1" class="item text-center">
+                                 <td class="sno">5.</td>
+                                 <td><input type="number" class="FR5 inputEn Fn" value="{{obserItem2.FR5}}"></td>
+                                 <td><input type="number" class="FR15 inputEn Fn" value="{{obserItem2.FR15}}"></td>
+                                 <td><input type="number" disabled class="Ec inputEn diff_fr5" value="{{obserItem2.DiffFullLoad.fd5}}"></td>
+                                 <td class="text-center"><input id="diFF" type="number" disabled class="errorE text-center form-control" value=0> </input></td>
+                              </tr>
+                              <tr id="rec-1" class="item text-center">
+                                 <td class="sno">6.</td>
+                                 <td><input type="number" class="FR6 inputEn Fn" value="{{obserItem2.FR6}}"></td>
+                                 <td><input type="number" class="FR16 inputEn Fn" value="{{obserItem2.FR16}}"></td>
+                                 <td><input type="number" disabled class="Ec inputEn diff_fr6" value="{{obserItem2.DiffFullLoad.fd6}}"></td>
+                                 <td></td>
+                              </tr>
+                              <tr id="rec-1" class="item text-center">
+                                 <td class="sno">7.</td>
+                                 <td><input type="number" class="FR7 inputEn Fn" value="{{obserItem2.FR7}}"></td>
+                                 <td><input type="number" class="FR17 inputEn Fn" value="{{obserItem2.FR17}}"></td>
+                                 <td><input type="number" disabled class="Ec inputEn diff_fr7" value="{{obserItem2.DiffFullLoad.fd7}}"></td>
+                                 <td></td>
+                              </tr>
+                              <tr id="rec-1" class="item text-center">
+                                 <td class="sno">8.</td>
+                                 <td><input type="number" class="FR8 inputEn Fn" value="{{obserItem2.FR8}}"></td>
+                                 <td><input type="number" class="FR18 inputEn Fn" value="{{obserItem2.FR18}}"></td>
+                                 <td><input type="number" disabled class="Ec inputEn diff_fr8" value="{{obserItem2.DiffFullLoad.fd8}}"></td>
+                                 <td></td>
+                              </tr>
+                              <tr id="rec-1" class="item text-center">
+                                 <td class="sno">9.</td>
+                                 <td><input type="number" class="FR9 inputEn Fn" value="{{obserItem2.FR9}}"></td>
+                                 <td><input type="number" class="FR19 inputEn Fn" value="{{obserItem2.FR19}}"></td>
+                                 <td><input type="number" disabled class="Ec inputEn diff_fr9" value="{{obserItem2.DiffFullLoad.fd9}}"></td>
+                                 <td></td>
+                              </tr>
+                              <tr id="rec-1" class="item text-center">
+                                 <td class="sno">10.</td>
+                                 <td><input type="number" class="FR10 inputEn Fn" value="{{obserItem2.FR10}}"></td>
+                                 <td><input type="number" class="FR20 inputEn Fn" value="{{obserItem2.FR20}}"></td>
+                                 <td><input type="number" disabled class="Ec inputEn diff_fr10" value="{{obserItem2.DiffFullLoad.fd10}}"></td>
+                                 <td></td>
+                              </tr>
+                           </tbody>
+                        </table>
+                        <div class="row">
+                           <div class="col-sm-12">
+                              <div class="form-group bmd-form-group">
+                                 <div id="div_id_remarks" class="control-group">
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<script src="{% static 'js/core/jquery.min.js' %}"></script>
+
+<script>
+   $(".instruselect").change(function () {
+
+     arrayInstru = []
+
+     $('.instruselect').each(function() {
+     var instrument = $(this).find(' option:selected').val();
+     var dictInstru = {};
+     dictInstru['instrument'] =instrument
+     if(dictInstru["instrument"] != ''){
+      arrayInstru.push(dictInstru);
+
+      $.ajax({
+        type: 'POST',
+        url: '{% url 'observation:getContact' %}',
+        data: {
+          'arrayIN[]': JSON.stringify(arrayInstru),
+          csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+          action: 'post',
+        },
+        success: function (data) {
+          console.log(data)
+          $(".coolAddress").html(data);
+        }
+
+      });
+
+      }
+      });
+
+   });
+</script>
+<script>
+   $(document).ready(function() {
+     $( ".obsN " ).change(function() {
+
+       val1 = $(this).closest("tr").find(".obs1").val();
+       val2 = $(this).closest("tr").find(".obs2").val();
+       val3 = $(this).closest("tr").find(".obs3").val();
+       val4 = $(this).closest("tr").find(".obs4").val();
+       starting_temp = $(this).closest("tr").find(".starting_temp").val();
+       ending_temp = $(this).closest("tr").find(".ending_temp").val();
+       middle_temp = $(this).closest("tr").find(".middle_temp").val();
+
+
+       ea = $(".Ea").val();
+       eb = $(".Eb").val();
+       ec = $(".Ec").val();
+       ed = $(".Ed").val();
+       eo = $(".Eo").val();
+
+
+       avgtemp = (parseFloat(starting_temp) + parseFloat(ending_temp) + parseFloat(middle_temp))/3
+
+       averageVale = (parseFloat(val1) + parseFloat(val2) + parseFloat(val3) + parseFloat(val4) )/4
+
+
+      abc = $(this).closest("tr").parent().closest('tr').find(".totalE").val(averageVale);
+      maxx= Math.max(ea,eb,ec,ed,eo)
+
+      initVal = parseFloat($(this).closest("tr").parent().closest('tr').find(".nomVal").val());
+
+      calcVal = (initVal-averageVale)
+
+      $(this).closest("tr").parent().closest('tr').find(".errorE").val(calcVal);
+      $('#maxValE').val(maxx);
+
+
+   });
+
+
+   });
+</script>
+<script>
+   $(document).ready(function() {
+     $( ".En " ).change(function() {
+
+
+       ea = $(".Ea").val();
+       eb = $(".Eb").val();
+       ec = $(".Ec").val();
+       ed = $(".Ed").val();
+       eo = $(".Eo").val();
+
+
+
+      maxx= Math.max(ea,eb,ec,ed,eo)
+      minn= Math.min(ea,eb,ec,ed,eo)
+      diff = maxx-minn
+
+      $('#maxValE').val(maxx);
+      $('#minValE').val(minn);
+      $('#diFF').val(diff);
+
+
+   });
+
+
+   });
+</script>
+<script>
+   $(document).ready(function() {
+     $( ".Repeatability" ).change(function() {
+
+       HR1 = $(".HR1").val();
+       HR2 = $(".HR2").val();
+       HR3 = $(".HR3").val();
+       HR4 = $(".HR4").val();
+       HR5 = $(".HR5").val();
+       HR6 = $(".HR6").val();
+       HR7 = $(".HR7").val();
+       HR8 = $(".HR8").val();
+       HR9 = $(".HR9").val();
+       HR10 = $(".HR10").val();
+
+       FR1 = $(".FR1").val();
+       FR2 = $(".FR2").val();
+       FR3 = $(".FR3").val();
+       FR4 = $(".FR4").val();
+       FR5 = $(".FR5").val();
+       FR6 = $(".FR6").val();
+       FR7 = $(".FR7").val();
+       FR8 = $(".FR8").val();
+       FR9 = $(".FR9").val();
+       FR10 = $(".FR10").val();
+
+
+       if (HR6 != '') {
+       sumNH = (parseFloat(HR1)+parseFloat(HR2)+parseFloat(HR3)+parseFloat(HR4)+parseFloat(HR5)+parseFloat(HR6)+parseFloat(HR7)+parseFloat(HR8)+parseFloat(HR9)+parseFloat(HR10))
+       avgNH = sumNH/10
+
+       sumNF = (parseFloat(FR1)+parseFloat(FR2)+parseFloat(FR3)+parseFloat(FR4)+parseFloat(FR5)+parseFloat(FR6)+parseFloat(FR7)+parseFloat(FR8)+parseFloat(FR9)+parseFloat(FR10))
+       avgNF = sumNF/10
+
+       } else {
+       sumNH = (parseFloat(HR1)+parseFloat(HR2)+parseFloat(HR3)+parseFloat(HR4)+parseFloat(HR5))
+       avgNH = sumNH/5
+
+       sumNF = (parseFloat(FR1)+parseFloat(FR2)+parseFloat(FR3)+parseFloat(FR4)+parseFloat(FR5))
+       avgNF = sumNF/5
+
+       }
+
+
+      $('.AvgHL').val(avgNH);
+      $('.AvgFL').val(avgNF);
+
+
+
+   });
+
+
+   });
+</script>
+<script>
+   $(document).delegate('.fetchButton', 'click', function(e) {
+    $("tr.apme").each(function() {
+      if($(this).find('.obs1').val()!=''){
+
+      duc_id='{{ srfN.instrument.id }}';
+      lc_duc = $(this).closest('.itemTYCard').find('.lc_duc').val()
+      lc_duc_unit = $(this).closest('.itemTYCard').find('.lc_duc_unit').val()
+
+
+      starting_temp= $("#id_starting_temp").val();
+      ending_temp= $("#id_ending_temp").val();
+      eccentricity_max_min = $("#diFF").val();
+
+      lc_duc_unit_parameter = $(this).closest('.itemTYCard').find('.lc_duc_unit_parameter').val()
+
+      cal_point = $(this).find('.nomVal').val()
+      cal_point_unit = $(this).closest('table').find('.nomValUnit option:selected').val()
+
+      // $(this).find('.wo_uuc option:selected').val();
+
+      obs_point_unit = $(this).closest('table').find(".obsValUnit option:selected").val()
+
+      obs1 = $(this).find('.obs1').val()
+
+      obs2 = $(this).find('.obs2').val()
+
+      obs3 = $(this).find('.obs3').val()
+
+      obs4 = $(this).find('.obs4').val()
+
+      obs5 = $(this).find('.obs5').val()
+
+      nomUnit = $(this).find('.nomUnit option:selected').val()
+      obsUnit = $(this).find('.obsUnit option:selected').val()
+
+
+      HR1 = $(".HR1").val()
+      HR2 = $(".HR2").val()
+      HR3 = $(".HR3").val()
+      HR4 = $(".HR4").val()
+      HR5 = $(".HR5").val()
+      HR6 = $(".HR6").val()
+      HR7 = $(".HR7").val()
+      HR8 = $(".HR8").val()
+      HR9 = $(".HR9").val()
+      HR10 = $(".HR10").val()
+
+      FR1 = $(".FR1").val()
+      FR2 = $(".FR2").val()
+      FR3 = $(".FR3").val()
+      FR4 = $(".FR4").val()
+      FR5 = $(".FR5").val()
+      FR6 = $(".FR6").val()
+      FR7 = $(".FR7").val()
+      FR8 = $(".FR8").val()
+      FR9 = $(".FR9").val()
+      FR10 = $(".FR10").val()
+      range= $('.range').val()
+
+      middle_temp= $(this).closest('.itemTYCard').find('.middle_temp').val()
+      least_count= $(this).closest('.itemTYCard').find('.least_count').val()
+
+      avgtemp = (parseFloat(starting_temp) + parseFloat(ending_temp) + parseFloat(middle_temp))/3
+      // avgtemp= $(this).find('.avgtemp').val()
+
+      tempP = avgtemp
+
+               $.ajax({
+                     type:'POST',
+                     url:'{% url 'observation:weighingUncertainView' %}',
+                     context: this,
+                     data:{
+                          duc_id: duc_id,
+                          lc_duc: lc_duc,
+                          lc_duc_unit:lc_duc_unit,
+                          lc_duc_unit_parameter: lc_duc_unit_parameter,
+                          cal_point: cal_point,
+                          cal_point_unit: cal_point_unit,
+                          obs_point_unit: obs_point_unit,
+                          obs1: obs1,
+                          obs2: obs2,
+                          obs3: obs3,
+                          obs4: obs4,
+                          obs5: obs5,
+                          nomUnit :nomUnit,
+                          obsUnit :obsUnit,
+                          HR1: HR1,
+                          HR2: HR2,
+                          HR3: HR3,
+                          HR4: HR4,
+                          HR5: HR5,
+                          HR6: HR6,
+                          HR7: HR7,
+                          HR8: HR8,
+                          HR9: HR9,
+                          HR10: HR10,
+                          FR1: FR1,
+                          FR2: FR2,
+                          FR3: FR3,
+                          FR4: FR4,
+                          FR5: FR5,
+                          FR6: FR6,
+                          FR7: FR7,
+                          FR8: FR8,
+                          FR9: FR9,
+                          FR10: FR10,
+                          range:range,
+                          starting_temp:starting_temp,
+                          ending_temp:ending_temp,
+                          middle_temp:middle_temp,
+                          avgtemp:avgtemp,
+                          tempP:tempP,
+                          least_count:least_count,
+                          eccentricity_max_min:eccentricity_max_min,
+
+                         csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                         action: 'post'
+                     },
+                     data_type : 'html',
+                     success: function (data) {
+                       console.log(data)
+
+
+
+                       unc = $(this).find('.uncertainP').val(JSON.parse(data)["Up"])
+                       unc2 = $(this).find('.leastE').val(JSON.parse(data)["U"])
+
+                     },
+                     error: function (data) {
+                         console.log("Got an error dude " + data);
+                     }
+                 });
+
+    }
+
+    });
+    });
+
+
+
+</script>
+<script>
+   jQuery(document).delegate('a.add-record', 'click', function(e) {
+     // e.preventDefault();
+
+     $('#tbl_posts').append($('#step_table tr:last td:last').html());
+
+       var content = jQuery('#sample_table > tbody > tr').not("#tbl_posts tbody tr table ");
+
+       size = jQuery('#tbl_posts >tbody >tr').length -2,
+       element = null,
+       element = content.clone(true);
+       element.attr('id', 'rec-'+size);
+       element.attr('class', 'item apme');
+
+       element.find('.delete-record').attr('data-id', size);
+       element.appendTo('#tbl_posts_body');
+       element.find('.sn').html(size);
+
+
+
+
+       });
+      //  $( document ).ready(function() {
+      //
+      //     alert(idns)
+      // });
+</script>
+<script>
+   $(document).delegate('#saveObs', 'click', function(e) {
+
+   arrayOI = []
+   check_source_measure = '{{check_source_measure}}';
+
+   $("tr.apme").each(function() {
+
+   if($(this).find('.obs1').val()!=''){
+   sfn_id= '{{ srfN.id }}';
+   id_calibration_performed_at = $("#id_calibration_performed_at").val()
+   cal_observation_no = $("#id_cal_observation_number").val()
+
+   remarks =$("#id_remarks").val()
+   start_temp = $("#id_starting_temp").val()
+   end_temp = $("#id_ending_temp").val()
+   id_humidity = $("#id_humidity").val()
+   id_zero_error = $("#id_zero_error").val()
+   least_count = $('#least_count').val()
+   
+
+    arraycert = []
+         var dictInstru = {};
+         $(this).find('.instru_itm :selected').each(function() {
+           certitem = $(this).val();
+           dictInstru['certitem'] =certitem
+
+           if(dictInstru["certitem"] != ''){
+              arraycert.push(certitem);
+           }
+
+         });
+
+   button_clicked = 'Save'
+
+
+
+
+   var dictOI = {};
+                dictOI["arraycert"] = arraycert;
+                dictOI['sn'] = $(this).find('.sn').text();
+                dictOI["duc_id"] = '{{ srfN.instrument.id }}';
+                dictOI["lc_duc"] = $(this).closest('.itemTYCard').find('.lc_duc').val();
+                dictOI["lc_duc_unit"] = $(this).closest('.itemTYCard').find('.lc_duc_unit').val();
+                dictOI["lc_duc_unit_parameter"] = $(this).closest('.itemTYCard').find('.lc_duc_unit_parameter').val();
+                dictOI["cal_point"] = $(this).find('.nomVal').val();
+                dictOI["cal_point_unit"] = $(this).closest('table').find('.nomValUnit option:selected').val();
+                dictOI["obs_point_unit"] = $(this).closest('table').find(".obsValUnit option:selected").val();
+                dictOI["obs1"] = $(this).find('.obs1').val();
+                dictOI["obs2"] = $(this).find('.obs2').val();
+                dictOI["obs3"] = $(this).find('.obs3').val();
+                dictOI["obs4"] = $(this).find('.obs4').val();
+                dictOI["nomUnit"] = $(this).find('.nomUnit option:selected').val();
+                dictOI["obsUnit"] = $(this).find('.obsUnit option:selected').val();
+                range= $('.range').val();
+                avgtemp = (parseFloat(starting_temp) + parseFloat(ending_temp) + parseFloat(middle_temp))/3
+                tempP = avgtemp;
+                if(dictOI["lc_duc"] != '' && dictOI["obs_point_unit"]!= '' && dictOI["obs1"]!='' && dictOI["obs2"]!='' && dictOI["obs3"]!='' && dictOI["obs4"]!='' && dictOI["obs5"]!='' && dictOI["nomUnit"]!='' && dictOI["obsUnit"]!=''){
+                arrayOI.push(dictOI);
+
+              }
+
+   }
+
+   });
+
+   HR1 = $(".HR1").val()
+   HR2 = $(".HR2").val()
+   HR3 = $(".HR3").val()
+   HR4 = $(".HR4").val()
+   HR5 = $(".HR5").val()
+   HR6 = $(".HR6").val()
+   HR7 = $(".HR7").val()
+   HR8 = $(".HR8").val()
+   HR9 = $(".HR9").val()
+   HR10 = $(".HR10").val()
+
+   HR11 = $(".HR11").val()
+   HR12 = $(".HR12").val()
+   HR13 = $(".HR13").val()
+   HR14 = $(".HR14").val()
+   HR15 = $(".HR15").val()
+   HR16 = $(".HR16").val()
+   HR17 = $(".HR17").val()
+   HR18 = $(".HR18").val()
+   HR19 = $(".HR19").val()
+   HR20 = $(".HR20").val()
+
+   FR1 = $(".FR1").val()
+ 
+   FR2 = $(".FR2").val()
+   FR3 = $(".FR3").val()
+   FR4 = $(".FR4").val()
+   FR5 = $(".FR5").val()
+   FR6 = $(".FR6").val()
+   FR7 = $(".FR7").val()
+   FR8 = $(".FR8").val()
+   FR9 = $(".FR9").val()
+   FR10 = $(".FR10").val()
+   FR11 = $(".FR11").val()
+   FR12 = $(".FR12").val()
+   FR13 = $(".FR13").val()
+   FR14 = $(".FR14").val()
+   FR15 = $(".FR15").val()
+   FR16 = $(".FR16").val()
+   FR17 = $(".FR17").val()
+   FR18 = $(".FR18").val()
+   FR19 = $(".FR19").val()
+   FR20 = $(".FR20").val()
+
+   E1 = $(".E1").val()
+   E2 = $(".E2").val()
+   E3 = $(".E3").val()
+   E4 = $(".E4").val()
+   E5 = $(".E5").val()
+   E6 = $(".E6").val()
+   E7 = $(".E7").val()
+   E8 = $(".E8").val()
+   E9 = $(".E9").val()
+   E10 = $(".E10").val()
+   E11 = $(".E11").val()
+
+   eccentricity_loading = $(".eccentricity_loading").val()
+   eccentricityUnit = $('.eccentricityUnit option:selected').val();
+
+   fulload_value = $(".fulload_value").val()
+   fullloadUnit = $('.fullloadUnit option:selected').val();
+
+   halfload_value = $(".halfload_value").val()
+   halfloadUnit = $('.halfloadUnit option:selected').val();
+
+
+
+   $.ajax({
+   type: 'POST',
+   url : '{% url 'observation:weighingBalanceView' %}',
+   context: this,
+
+   data:{
+
+   sfn_id : sfn_id,
+   scopes: $('#scope option:selected').val(),
+   id_calibration_performed_at: id_calibration_performed_at,
+   cal_observation_no : cal_observation_no,
+   remarks:remarks,
+   range:range,
+   start_temp: start_temp,
+   end_temp: end_temp,
+   least_count: least_count,
+   id_calibration_performed_at: id_calibration_performed_at,
+   avgtemp:avgtemp,
+   check_source_measure:check_source_measure,
+   tempP:tempP,
+   id_humidity:id_humidity,
+   id_zero_error:id_zero_error,
+   button_clicked:button_clicked,
+
+   HR1: HR1,
+   HR2: HR2,
+   HR3: HR3,
+   HR4: HR4,
+   HR5: HR5,
+   HR6: HR6,
+   HR7: HR7,
+   HR8: HR8,
+   HR9: HR9,
+   HR10: HR10,
+   HR11: HR11,
+   HR12: HR12,
+   HR13: HR13,
+   HR14: HR14,
+   HR15: HR15,
+   HR16: HR16,
+   HR17: HR17,
+   HR18: HR18,
+   HR19: HR19,
+   HR20: HR20,
+
+   FR1: FR1,
+   FR2: FR2,
+   FR3: FR3,
+   FR4: FR4,
+   FR5: FR5,
+   FR6: FR6,
+   FR7: FR7,
+   FR8: FR8,
+   FR9: FR9,
+   FR10: FR10,
+   FR11: FR11,
+   FR12: FR12,
+   FR13: FR13,
+   FR14: FR14,
+   FR15: FR15,
+   FR16: FR16,
+   FR17: FR17,
+   FR18: FR18,
+   FR19: FR19,
+   FR20: FR20,
+
+   E1: E1,
+   E2: E2,
+   E3: E3,
+   E4: E4,
+   E5: E5,
+   E6: E6,
+   E7: E7,
+   E8: E8,
+   E9: E9,
+   E10: E10,
+   E11: E11,
+
+   eccentricity_loading : eccentricity_loading,
+   eccentricityUnit : eccentricityUnit,
+
+   fulload_value :fulload_value,
+   fullloadUnit :fullloadUnit,
+
+   halfload_value :halfload_value,
+   halfloadUnit :halfloadUnit,
+
+
+    'arrayOID[]':  JSON.stringify(arrayOI),
+   csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+   action: 'post',
+   },
+   data_type : 'html',
+        success: function (data) {
+                  console.log(data)
+                  window.location.href='{% url 'observation:observationDashboard'  %}'
+                },
+                error: function (data) {
+                    console.log("Got an error dude " + data);
+                }
+   });
+
+
+     });
+
+</script>
+<script>
+   $(document).delegate('#subMButt2', 'click', function(e) {
+
+   arrayOI = []
+   check_source_measure = '{{check_source_measure}}';
+
+   $("tr.apme").each(function() {
+
+   if($(this).find('.obs1').val()!=''){
+   sfn_id= '{{ srfN.id }}';
+   id_calibration_performed_at = $("#id_calibration_performed_at").val()
+   cal_observation_no = $("#id_cal_observation_number").val()
+
+   remarks =$("#id_remarks").val()
+   start_temp = $("#id_starting_temp").val()
+   end_temp = $("#id_ending_temp").val()
+   id_humidity = $("#id_humidity").val()
+   id_zero_error = $("#id_zero_error").val()
+
+
+
+
+   button_clicked = 'Submit'
+
+
+   var dictOI = {};
+                // alert($(this).find('#id_calibratedBy').val());
+                // dictOI["itemName"] = $(this).find(".wo_uuc").attr('selected', true);
+                dictOI['sn'] = $(this).find('.sn').text();
+                dictOI["duc_id"] = '{{ srfN.instrument.id }}';
+                dictOI["lc_duc"] = $(this).closest('.itemTYCard').find('.lc_duc').val();
+                dictOI["lc_duc_unit"] = $(this).closest('.itemTYCard').find('.lc_duc_unit').val();
+                dictOI["lc_duc_unit_parameter"] = $(this).closest('.itemTYCard').find('.lc_duc_unit_parameter').val();
+                dictOI["cal_point"] = $(this).find('.nomVal').val();
+                dictOI["cal_point_unit"] = $(this).closest('table').find('.nomValUnit option:selected').val();
+                dictOI["obs_point_unit"] = $(this).closest('table').find(".obsValUnit option:selected").val();
+                dictOI["obs1"] = $(this).find('.obs1').val();
+                dictOI["obs2"] = $(this).find('.obs2').val();
+                dictOI["obs3"] = $(this).find('.obs3').val();
+                dictOI["obs4"] = $(this).find('.obs4').val();
+                dictOI["obs5"] = $(this).find('.obs5').val();
+                dictOI["nomUnit"] = $(this).find('.nomUnit option:selected').val();
+                dictOI["obsUnit"] = $(this).find('.obsUnit option:selected').val();
+                range= $('.range').val();
+
+                // alert(starting_temp)
+                avgtemp = (parseFloat(starting_temp) + parseFloat(ending_temp) + parseFloat(middle_temp))/3
+                tempP = avgtemp;
+                if(dictOI["lc_duc"] != '' && dictOI["obs_point_unit"]!= '' && dictOI["obs1"]!='' && dictOI["obs2"]!='' && dictOI["obs3"]!='' && dictOI["obs4"]!='' && dictOI["obs5"]!='' && dictOI["nomUnit"]!='' && dictOI["obsUnit"]!=''){
+                arrayOI.push(dictOI);
+
+              }
+
+   }
+
+   });
+
+                    HR1 = $(".HR1").val()
+   HR2 = $(".HR2").val()
+   HR3 = $(".HR3").val()
+   HR4 = $(".HR4").val()
+   HR5 = $(".HR5").val()
+   HR6 = $(".HR6").val()
+   HR7 = $(".HR7").val()
+   HR8 = $(".HR8").val()
+   HR9 = $(".HR9").val()
+   HR10 = $(".HR10").val()
+
+   FR1 = $(".FR1").val()
+   FR2 = $(".FR2").val()
+   FR3 = $(".FR3").val()
+   FR4 = $(".FR4").val()
+   FR5 = $(".FR5").val()
+   FR6 = $(".FR6").val()
+   FR7 = $(".FR7").val()
+   FR8 = $(".FR8").val()
+   FR9 = $(".FR9").val()
+   FR10 = $(".FR10").val()
+
+   ea = $(".Ea").val()
+   eb = $(".Eb").val()
+   ec = $(".Ec").val()
+   ed = $(".Ed").val()
+   eo = $(".Eo").val()
+
+   $.ajax({
+   type: 'POST',
+   url : '{% url 'observation:weighingBalanceView' %}',
+   context: this,
+
+   data:{
+
+   sfn_id : sfn_id,
+   id_calibration_performed_at: id_calibration_performed_at,
+   cal_observation_no : cal_observation_no,
+   remarks:remarks,
+   range:range,
+   start_temp: start_temp,
+   end_temp: end_temp,
+   least_count: least_count,
+   id_calibration_performed_at: id_calibration_performed_at,
+   avgtemp:avgtemp,
+   check_source_measure:check_source_measure,
+   tempP:tempP,
+   id_humidity:id_humidity,
+   id_zero_error:id_zero_error,
+   button_clicked:button_clicked,
+
+   HR1: HR1,
+   HR2: HR2,
+   HR3: HR3,
+   HR4: HR4,
+   HR5: HR5,
+   HR6: HR6,
+   HR7: HR7,
+   HR8: HR8,
+   HR9: HR9,
+   HR10: HR10,
+   FR1: FR1,
+   FR2: FR2,
+   FR3: FR3,
+   FR4: FR4,
+   FR5: FR5,
+   FR6: FR6,
+   FR7: FR7,
+   FR8: FR8,
+   FR9: FR9,
+   FR10: FR10,
+   ea: ea,
+   eb: eb,
+   ec: ec,
+   ed: ed,
+   eo: eo,
+
+    'arrayOID[]':  JSON.stringify(arrayOI),
+   csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+   action: 'post',
+   },
+   data_type : 'html',
+        success: function (data) {
+                  console.log(data)
+                  window.location.href='{% url 'observation:observationDashboard'  %}'
+                },
+                error: function (data) {
+                    console.log("Got an error dude " + data);
+                }
+   });
+
+
+     });
+
+</script>
+<script>
+   $(document).ready(function() {
+     $( ".nomUnit " ).change(function() {
+     unit_nom = $('.nomUnit').val()
+     abc = $("#nomS").val(unit_nom)
+     });
+
+     $( ".obsUnit" ).change(function() {
+     unit_obs = $('.obsUnit').val()
+     abc = $(".obsS").val(unit_obs)
+     });
+
+     unit_nom = $('.nomUnit').val()
+     abc = $("#nomS").val(unit_nom)
+     unit_obs = $('.obsUnit').val()
+     abcd = $(".obsS").val(unit_obs)
+
+
+     });
+</script>
+
+
+<script>
+   $(document).ready(function() {
+     $( ".HRitem" ).change(function() {
+
+          HalfR1 = $(this).find(".HR1").val();
+          HR_INT1 = parseFloat(HalfR1)
+          HalfR2 = $(this).find(".HR2").val();
+          HR_INT2 = parseFloat(HalfR2)
+          HalfR3 = $(this).find(".HR3").val();
+          HR_INT3 = parseFloat(HalfR3)
+          HalfR4 = $(this).find(".HR4").val();
+          HR_INT4 = parseFloat(HalfR4)
+          HalfR5 = $(this).find(".HR5").val();
+          HR_INT5 = parseFloat(HalfR5)
+          HalfR6 = $(this).find(".HR6").val();
+          HR_INT6 = parseFloat(HalfR6)
+          HalfR7 = $(this).find(".HR7").val();
+          HR_INT7 = parseFloat(HalfR7)
+          HalfR8 = $(this).find(".HR8").val();
+          HR_INT8 = parseFloat(HalfR8)
+          HalfR9 = $(this).find(".HR9").val();
+          HR_INT9 = parseFloat(HalfR9)
+          HalfR10 = $(this).find(".HR10").val();
+          HR_INT10 = parseFloat(HalfR10)
+
+          HalfR11 = $(this).find(".HR11").val();
+          HR_INT_11 = parseFloat(HalfR11)
+          HalfR12 = $(this).find(".HR12").val();
+          HR_INT_12 = parseFloat(HalfR12)
+          HalfR13 = $(this).find(".HR13").val();
+          HR_INT_13 = parseFloat(HalfR13)
+          HalfR14 = $(this).find(".HR14").val();
+          HR_INT_14 = parseFloat(HalfR14)
+          HalfR15 = $(this).find(".HR15").val();
+          HR_INT_15 = parseFloat(HalfR15)
+          HalfR16 = $(this).find(".HR16").val();
+          HR_INT_16 = parseFloat(HalfR16)
+          HalfR17 = $(this).find(".HR17").val();
+          HR_INT_17 = parseFloat(HalfR17)
+          HalfR18 = $(this).find(".HR18").val();
+          HR_INT_18 = parseFloat(HalfR18)
+          HalfR19 = $(this).find(".HR19").val();
+          HR_INT_19 = parseFloat(HalfR19)
+          HalfR20 = $(this).find(".HR20").val();
+          HR_INT_20 = parseFloat(HalfR20)
+
+          HRsub1 = HR_INT_11 - HR_INT1;
+          HRsub2 = HR_INT_12 - HR_INT2;
+          HRsub3 = HR_INT_13 - HR_INT3;
+          HRsub4 = HR_INT_14 - HR_INT4;
+          HRsub5 = HR_INT_15 - HR_INT5;
+          HRsub6 = HR_INT_16 - HR_INT6;
+          HRsub7 = HR_INT_17 - HR_INT7;
+          HRsub8 = HR_INT_18 - HR_INT8;
+          HRsub9 = HR_INT_19 - HR_INT9;
+          HRsub10 = HR_INT_20 - HR_INT10;
+
+          $('.diffhr1').val(HRsub1)
+          $('.diffhr2').val(HRsub2)
+          $('.diffhr3').val(HRsub3)
+          $('.diffhr4').val(HRsub4)
+          $('.diffhr5').val(HRsub5)
+          $('.diffhr6').val(HRsub6)
+          $('.diffhr7').val(HRsub7)
+          $('.diffhr8').val(HRsub8)
+          $('.diffhr9').val(HRsub9)
+          $('.diffhr10').val(HRsub10)
+      })
+      });
+</script>
+<script>
+   $(document).ready(function() {
+     $( ".FRitem" ).change(function() {
+
+          FR_singh1 = $(this).find(".FR1").val();
+          FR_oupput1 = parseFloat(FR_singh1)
+          FR_singh2 = $(this).find(".FR2").val();
+          FR_oupput2 = parseFloat(FR_singh2)
+          FR_singh3 = $(this).find(".FR3").val();
+          FR_oupput3 = parseFloat(FR_singh3)
+          FR_singh4 = $(this).find(".FR4").val();
+          FR_oupput4 = parseFloat(FR_singh4)
+          FR_singh5 = $(this).find(".FR5").val();
+          FR_oupput5 = parseFloat(FR_singh5)
+          FR_singh6 = $(this).find(".FR6").val();
+          FR_oupput6 = parseFloat(FR_singh6)
+          FR_singh7 = $(this).find(".FR7").val();
+          FR_oupput7 = parseFloat(FR_singh7)
+          FR_singh8 = $(this).find(".FR8").val();
+          FR_oupput8 = parseFloat(FR_singh8)
+          FR_singh9 = $(this).find(".FR9").val();
+          FR_oupput9 = parseFloat(FR_singh9)
+          FR_singh10 = $(this).find(".FR10").val();
+          FR_oupput10 = parseFloat(FR_singh10)
+
+          ve1 = $(this).find(".FR11").val();
+          FR_num1 = parseFloat(ve1)
+          ve2 = $(this).find(".FR12").val();
+          FR_num2 = parseFloat(ve2)
+          ve3 = $(this).find(".FR13").val();
+          FR_num3 = parseFloat(ve3)
+          ve4 = $(this).find(".FR14").val();
+          FR_num4 = parseFloat(ve4)
+          ve5 = $(this).find(".FR15").val();
+          FR_num5 = parseFloat(ve5)
+          ve6 = $(this).find(".FR16").val();
+          FR_num6 = parseFloat(ve6)
+          ve7 = $(this).find(".FR17").val();
+          FR_num7 = parseFloat(ve7)
+          ve8 = $(this).find(".FR18").val();
+          FR_num8 = parseFloat(ve8)
+          ve9 = $(this).find(".FR19").val();
+          FR_num9 = parseFloat(ve9)
+          ve10 = $(this).find(".FR20").val();
+          FR_num10 = parseFloat(ve10)
+
+          FRsb1 = FR_num1 - FR_oupput1;
+          FRsb2 = FR_num2 - FR_oupput2;
+          FRsb3 = FR_num3 - FR_oupput3;
+          FRsb4 = FR_num4 - FR_oupput4;
+          FRsb5 = FR_num5 - FR_oupput5;
+          FRsb6 = FR_num6 - FR_oupput6;
+          FRsb7 = FR_num7 - FR_oupput7;
+          FRsb8 = FR_num8 - FR_oupput8;
+          FRsb9 = FR_num9 - FR_oupput9;
+          FRsb10 = FR_num10 - FR_oupput10;
+
+          $('.diff_fr1').val(FRsb1)
+          $('.diff_fr2').val(FRsb2)
+          $('.diff_fr3').val(FRsb3)
+          $('.diff_fr4').val(FRsb4)
+          $('.diff_fr5').val(FRsb5)
+          $('.diff_fr6').val(FRsb6)
+          $('.diff_fr7').val(FRsb7)
+          $('.diff_fr8').val(FRsb8)
+          $('.diff_fr9').val(FRsb9)
+          $('.diff_fr10').val(FRsb10)
+
+         })
+       });
+
+</script>
+<script>
+  $(document).ready(function() {
+      $( ".vee" ).change(function() {
+
+          Eccentricity1 = $(this).find(".E1").val();
+          console.log(Eccentricity1)
+          Eccentricity_INT_1 = parseFloat(Eccentricity1)
+          Eccentricity2 = $(this).find(".E2").val();
+          Eccentricity_INT_2 = parseFloat(Eccentricity2)
+          Eccentricity3 = $(this).find(".E3").val();
+          Eccentricity_INT_3 = parseFloat(Eccentricity3)
+          console.log(Eccentricity3)
+          Eccentricity4 = $(this).find(".E4").val();
+          Eccentricity_INT_4 = parseFloat(Eccentricity4)
+          Eccentricity5 = $(this).find(".E5").val();
+          Eccentricity_INT_5 = parseFloat(Eccentricity5)
+          Eccentricity6 = $(this).find(".E6").val();
+          Eccentricity_INT_6 = parseFloat(Eccentricity6)
+          Eccentricity7 = $(this).find(".E7").val();
+          Eccentricity_INT_7 = parseFloat(Eccentricity7)
+          Eccentricity8 = $(this).find(".E8").val();
+          Eccentricity_INT_8 = parseFloat(Eccentricity8)
+          Eccentricity9 = $(this).find(".E9").val();
+          Eccentricity_INT_9 = parseFloat(Eccentricity9)
+          Eccentricity10 = $(this).find(".E10").val();
+          Eccentricity_INT_10 = parseFloat(Eccentricity10)
+          Eccentricity11 = $(this).find(".E11").val();
+          Eccentricity_INT_11 = parseFloat(Eccentricity11)
+
+
+
+          Eccentricity_1_6_11 = (Eccentricity_INT_1 + Eccentricity_INT_6 + Eccentricity_INT_11)/3
+          $('.obs21').val(Eccentricity_1_6_11)
+
+          Eccentricity_2_10 = (Eccentricity_INT_2 + Eccentricity_INT_10)/2
+          $('.obs22').val(Eccentricity_2_10)
+
+          Eccentricity_3_9 = (Eccentricity_INT_3 + Eccentricity_INT_9)/2
+          $('.obs23').val(Eccentricity_3_9)
+
+          Eccentricity_4_8 = (Eccentricity_INT_4 + Eccentricity_INT_8)/2
+          $('.obs24').val(Eccentricity_4_8)
+
+          Eccentricity_5_7 = (Eccentricity_INT_5 + Eccentricity_INT_7)/2
+          $('.obs25').val(Eccentricity_5_7)
+
+          diff_obs1_INT_01 = Eccentricity_1_6_11 - Eccentricity_2_10
+          diff_obs1_INT_02 = Eccentricity_1_6_11 - Eccentricity_3_9
+          diff_obs1_INT_03 = Eccentricity_1_6_11 - Eccentricity_4_8
+          diff_obs1_INT_04 = Eccentricity_1_6_11 - Eccentricity_5_7
+
+          $('.obsdiff21').val(diff_obs1_INT_01)
+          $('.obsdiff22').val(diff_obs1_INT_02)
+          $('.obsdiff23').val(diff_obs1_INT_03)
+          $('.obsdiff24').val(diff_obs1_INT_04)
+
+
+
+
+      })
+      });
+
+</script>
+
+{% endblock %}
