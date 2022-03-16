@@ -49,34 +49,34 @@
                <div class="card-icon">
                   <i class="material-icons">mail_outline</i>
                </div>
-               <h4 class="card-title">Calibration Weighing Balance</h4>
+               <h4 class="card-title">Calibration Observation Sheet Weighing Balance</h4>
             </div>
             <div class="card-body ">
                <div class="row">
                   <div class="col-md-12">
                      <div class="card-body ">
                         <div class="well clearfix">
-                           <!-- <a class="btn pull-right add-record btn-success text-white" data-added="0">Add Observation Record</a> -->
+                           <a class="btn pull-right add-record btn-success text-white" data-added="0">Add Observation Record</a>
                         </div>
                         <div class="row">
                            <div class="col-sm-6">
                               <div class="form-group">
-                            
+                                 {{ Weighing1.starting_temp|as_crispy_field }}
                               </div>
                            </div>
                            <div class="col-sm-6">
                               <div class="form-group">
-                                 
+                                 {{ Weighing1.ending_temp|as_crispy_field }}
                               </div>
                            </div>
                            <div class="col-sm-4">
                               <div class="form-group">
-                                
+                                 {{ Weighing1.humidity|as_crispy_field }}
                               </div>
                            </div>
                            <div class="col-sm-4">
                               <div class="form-group">
-                                
+                                 {{ Weighing1.zero_error|as_crispy_field }}
                               </div>
                            </div>
                            <div class="col-sm-4" style="user-select: auto;">
@@ -86,13 +86,12 @@
                                     Least Count
                                     </label>
                                     <div class="" style="user-select: auto;">
-                                       <input type="text" name="least_count" class="form-control textinput textInput least_count mkkkkk" id="least_count" style="user-select: auto;" value="{{obserItem2.least_count}}">
+                                       <input type="text" name="least_count" class="form-control textinput textInput least_count" id="least_count" style="user-select: auto;">
                                     </div>
                                  </div>
                               </div>
                            </div>
                         </div>
-                        
                         <table class="table table-bordered" id="tbl_posts">
                            <thead>
                               <tr>
@@ -120,21 +119,11 @@
                            </thead>
                            <tfoot>
                            </tfoot>
-                           {% for item in obserItem %}
                            <tbody id="tbl_posts_body">
-                             
                               <tr id="rec-1" class="item apme">
                                  <td class="sno"><span class="sn">1</span>.</td>
                                  <td class="instr" >
                                     <div class="coolAddress">
-                                      <div>
-                                          
-                                            {{item.master_weight_item.all}}
-                                          
-
-                                        
-
-                                      </div>
                                     </div>
                                  </td>
                                  <td>
@@ -145,29 +134,27 @@
                                     </select>
                                  </td>
                                  <td class="obsin">
-                                    <table width="100%">
+                                    <table>
                                        <tr>
-                                          <td>{{ item.observation_1 }}</td>
-                                          <td>{{ item.observation_2 }}</td>
-                                          <td>{{ item.observation_3 }}</td>
-                                          <td>{{ item.observation_4 }}</td>
+                                          <td>{{ observIt.observation_1 }}</td>
+                                          <td>{{ observIt.observation_2 }}</td>
+                                          <td>{{ observIt.observation_3 }}</td>
+                                          <td>{{ observIt.observation_4 }}</td>
                                        </tr>
                                     </table>
                                  </td>
                                  <td>
                                     <select class="form-control obsUnit" data-style="btn btn-link" >
                                        {% for m, n in weighing_unit %}
-                                       <option value="{{m}}">{{n}}</option> 
+                                       <option value="{{m}}">{{n}}</option>
                                        {% endfor %}
                                     </select>
                                  </td>
-                                 <td><input class="form-control totalE" disabled value="{{obserItem.first.avg}}"></td>
+                                 <td><input class="form-control totalE" disabled value="0"></td>
                                  <td><input type="number" disabled class="uncertainP form-control" value="0"> </input></td>
                                  <td><a class="btn btn-xs delete-record btn-rose btn-link" data-id="1">X</a></td>
                               </tr>
-                              
                            </tbody>
-                           {% endfor %}
                         </table>
                         <div class="row">
                            <div class="col-sm-12">
@@ -183,19 +170,18 @@
                      </div>
                      <div class="card-footer text-right">
                         <div class="col-sm-12">
-                           <!-- <button type="button" id="fetchButton" class="btn btn-rose fetchButton">fetch</button>
+                           <button type="button" id="fetchButton" class="btn btn-rose fetchButton">fetch</button>
                            <button type="button" id="subMButt2" class="btn btn-rose">Submit</button>
-                           <button type="button" id="saveObs" class="btn btn-rose">Save</button> -->
+                           <button type="button" id="saveObs" class="btn btn-rose">Save</button>
                         </div>
                      </div>
                      <div style="display:none;">
                         <table id="sample_table">
-                          
                            <tr id="" class="item">
                               <td class="sno"> <span class="sn">1</span>.</td>
                                <td class="instr" >
                                     <div class="coolAddress">
-                                       <h2></h2>
+
                                     </div>
                                  </td>
                               <td>
@@ -228,7 +214,6 @@
                               <!--                                          <td> <input type="number" disabled class="errorE form-control" value=0> </input>  </td>-->
                               <td><a class="btn btn-xs delete-record btn-rose btn-link" data-id="1">X</a></td>
                            </tr>
-                          
                         </table>
                      </div>
                   </div>
@@ -240,7 +225,6 @@
             <div class="row">
          <div class="card ">
             <div class="card-body ">
-              
                <div class="row">
                   <p class="border title" style="border-width:20px; margin-left:35px;">&nbsp;&nbsp;<b>Eccentricity Loading</b>&nbsp;&nbsp;
                   </p>
@@ -262,9 +246,8 @@
                            <tfoot>
                            </tfoot>
                            <tbody id="tbl_posts_body">
-
                               <tr id="rec-1" class="mainitem">
-                                 <td><input class="form-control stdv eccentricity_loading"  value="{{obserItem2.eccentricity_loading}}"></td>
+                                 <td><input class="form-control stdv eccentricity_loading"  value=""></td>
                                  <td>
                                     <select class="text-center form-control eccentricityUnit" data-style="btn btn-link" >
                                        {% for m, n in weighing_unit %}
@@ -344,57 +327,57 @@
                                              <table class="vee">
                                                 <tr>
                                                    <td>
-                                                      <input id="obs1"  class="form-control EL E1" value="{{obserItem2.E1}}">
+                                                      <input id="obs1"  class="form-control EL E1" value="">
                                                    </td>
                                                 </tr>
                                                 <tr>
                                                    <td>
-                                                      <input id="obs1"  class="form-control EL E2" value="{{obserItem2.E2}}">
+                                                      <input id="obs1"  class="form-control EL E2" value="">
                                                    </td>
                                                 </tr>
                                                 <tr>
                                                    <td>
-                                                      <input id="obs1"  class="form-control EL E3" value="{{obserItem2.E3}}">
+                                                      <input id="obs1"  class="form-control EL E3" value="">
                                                    </td>
                                                 </tr>
                                                 <tr>
                                                    <td>
-                                                      <input id="obs1"  class="form-control EL E4" value="{{obserItem2.E4}}">
+                                                      <input id="obs1"  class="form-control EL E4" value="">
                                                    </td>
                                                 </tr>
                                                 <tr>
                                                    <td>
-                                                      <input id="obs1"  class="form-control EL E5" value="{{obserItem2.E5}}">
+                                                      <input id="obs1"  class="form-control EL E5" value="">
                                                    </td>
                                                 </tr>
                                                 <tr>
                                                    <td>
-                                                      <input id="obs1"  class="form-control EL E6" value="{{obserItem2.E6}}">
+                                                      <input id="obs1"  class="form-control EL E6" value="">
                                                    </td>
                                                 </tr>
                                                 <tr>
                                                    <td>
-                                                      <input id="obs1"  class="form-control EL E7" value="{{obserItem2.E7}}">
+                                                      <input id="obs1"  class="form-control EL E7" value="">
                                                    </td>
                                                 </tr>
                                                 <tr>
                                                    <td>
-                                                      <input id="obs1"  class="form-control EL E8" value="{{obserItem2.E8}}">
+                                                      <input id="obs1"  class="form-control EL E8" value="">
                                                    </td>
                                                 </tr>
                                                 <tr>
                                                    <td>
-                                                      <input id="obs1"  class="form-control EL E9" value="{{obserItem2.E9}}">
+                                                      <input id="obs1"  class="form-control EL E9" value="">
                                                    </td>
                                                 </tr>
                                                 <tr>
                                                    <td>
-                                                      <input id="obs1"  class="form-control EL E10" value="{{obserItem2.E10}}">
+                                                      <input id="obs1"  class="form-control EL E10" value="">
                                                    </td>
                                                 </tr>
                                                 <tr>
                                                    <td>
-                                                      <input id="obs1"  class="form-control EL E11" value="{{obserItem2.E11}}">
+                                                      <input id="obs1"  class="form-control EL E11" value="">
                                                    </td>
                                                 </tr>
                                              </table>
@@ -438,27 +421,27 @@
                                              <table class="vee">
                                                 <tr>
                                                    <td>
-                                                      <input id="obs1" class="form-control obsNM obs21" value="{{obserItem2.mean.Lmen1}}">
+                                                      <input id="obs1" class="form-control obsNM obs21" value="">
                                                    </td>
                                                 </tr>
                                                 <tr>
                                                    <td>
-                                                      <input id="obs1" class="form-control obsNM obs22" value="{{obserItem2.mean.Lmen2}}">
+                                                      <input id="obs1" class="form-control obsNM obs22" value="">
                                                    </td>
                                                 </tr>
                                                 <tr>
                                                    <td>
-                                                      <input id="obs1" class="form-control obsNM obs23" value="{{obserItem2.mean.Lmen3}}">
+                                                      <input id="obs1" class="form-control obsNM obs23" value="">
                                                    </td>
                                                 </tr>
                                                 <tr>
                                                    <td>
-                                                      <input id="obs1" class="form-control obsNM obs24" value="{{obserItem2.mean.Lmen4}}">
+                                                      <input id="obs1" class="form-control obsNM obs24" value="">
                                                    </td>
                                                 </tr>
                                                 <tr>
                                                    <td>
-                                                      <input id="obs1" class="form-control obsNM obs25" value="{{obserItem2.mean.Lmen5}}">
+                                                      <input id="obs1" class="form-control obsNM obs25" value="">
                                                    </td>
                                                 </tr>
                                              </table>
@@ -502,22 +485,22 @@
                                              <table>
                                                 <tr>
                                                    <td>
-                                                      <input id="obs1" disabled class="form-control obsNM obsdiff21" value="{{obserItem2.mean.h1}}">
+                                                      <input id="obs1" disabled class="form-control obsNM obsdiff21" value="">
                                                    </td>
                                                 </tr>
                                                 <tr>
                                                    <td>
-                                                      <input id="obs1" disabled class="form-control obsNM obsdiff22" value="{{obserItem2.mean.h2}}">
+                                                      <input id="obs1" disabled class="form-control obsNM obsdiff22" value="">
                                                    </td>
                                                 </tr>
                                                 <tr>
                                                    <td>
-                                                      <input id="obs1" disabled class="form-control obsNM obsdiff23" value="{{obserItem2.mean.h3}}">
+                                                      <input id="obs1" disabled class="form-control obsNM obsdiff23" value="">
                                                    </td>
                                                 </tr>
                                                 <tr>
                                                    <td>
-                                                      <input id="obs1" disabled class="form-control obsNM obsdiff24" value="{{obserItem2.mean.h4}}">
+                                                      <input id="obs1" disabled class="form-control obsNM obsdiff24" value="">
                                                    </td>
                                                 </tr>
                                                 <tr>
@@ -545,7 +528,6 @@
                      </div>
                   </div>
                </div>
-               
             </div>
          </div>
       </div>
@@ -566,7 +548,6 @@
                      </td>
                   </table>
                   </p>
-                  
                   <div class="col-md-12" style="margin-top:-40px;">
                      <div class="card-body ">
                         <table class="table table-bordered" id="tbl_posts">
@@ -585,72 +566,72 @@
                            <tbody id="tbl_posts_body" class="HRitem">
                               <tr id="rec-1" class="item text-center">
                                  <td class="sno">1.</td>
-                                 <td><input type="number" class="HR1 inputEn Hn" value="{{obserItem2.HR1}}"></td>
-                                 <td><input type="number" class="HR11 inputEn Hn" value="{{obserItem2.HR11}}"></td>
-                                 <td><input type="number" disabled value="{{obserItem2.DiffHalfLoad.hd1}}" class="Ec inputEn diffhr1"></td>
+                                 <td><input type="number" class="HR1 inputEn Hn" value=""></td>
+                                 <td><input type="number" class="HR11 inputEn Hn" value=""></td>
+                                 <td><input type="number" disabled value="inputEn" class="Ec inputEn diffhr1"></td>
                                  <td></td>
                               </tr>
                               <tr id="rec-1" class="item text-center">
                                  <td class="sno">2.</td>
-                                 <td><input type="number" class="HR2 inputEn Hn" value="{{obserItem2.HR2}}"></td>
-                                 <td><input type="number" class="HR12 inputEn Hn" value="{{obserItem2.HR12}}"></td>
-                                 <td><input type="number" disabled class="Ec inputEn diffhr2" value="{{obserItem2.DiffHalfLoad.hd2}}"></td>
+                                 <td><input type="number" class="HR2 inputEn Hn" value=""></td>
+                                 <td><input type="number" class="HR12 inputEn Hn" value=""></td>
+                                 <td><input type="number" disabled class="Ec inputEn diffhr2" value=""></td>
                                  <td></td>
                               </tr>
                               <tr id="rec-1" class="item text-center">
                                  <td class="sno">3.</td>
-                                 <td><input type="number" class="HR3 inputEn Hn" value="{{obserItem2.HR3}}"></td>
-                                 <td><input type="number" class="HR13 inputEn Hn" value="{{obserItem2.HR13}}"></td>
-                                 <td><input type="number" disabled class="Ec inputEn diffhr3" value="{{obserItem2.DiffHalfLoad.hd3}}"></td>
+                                 <td><input type="number" class="HR3 inputEn Hn" value=""></td>
+                                 <td><input type="number" class="HR13 inputEn Hn" value=""></td>
+                                 <td><input type="number" disabled class="Ec inputEn diffhr3" value=""></td>
                                  <td></td>
                               </tr>
                               <tr id="rec-1" class="item text-center">
                                  <td class="sno">4.</td>
-                                 <td><input type="number" class="HR4 inputEn Hn" value="{{obserItem2.HR4}}"></td>
-                                 <td><input type="number" class="HR14 inputEn Hn" value="{{obserItem2.HR14}}"></td>
-                                 <td><input type="number" disabled class="Ec inputEn diffhr4" value="{{obserItem2.DiffHalfLoad.hd4}}"></td>
+                                 <td><input type="number" class="HR4 inputEn Hn" value=""></td>
+                                 <td><input type="number" class="HR14 inputEn Hn" value=""></td>
+                                 <td><input type="number" disabled class="Ec inputEn diffhr4" value=""></td>
                                  <td></td>
                               </tr>
                               <tr id="rec-1" class="item text-center">
                                  <td class="sno">5.</td>
-                                 <td><input type="number" class="HR5 inputEn Hn" value="{{obserItem2.HR5}}"></td>
-                                 <td><input type="number" class="HR15 inputEn Hn" value="{{obserItem2.HR15}}"></td>
-                                 <td><input type="number" disabled class="Ec inputEn diffhr5" value="{{obserItem2.DiffHalfLoad.hd5}}"></td>
+                                 <td><input type="number" class="HR5 inputEn Hn" value=""></td>
+                                 <td><input type="number" class="HR15 inputEn Hn" value=""></td>
+                                 <td><input type="number" disabled class="Ec inputEn diffhr5" value=""></td>
                                  <td class="text-center"><input id="diFF" type="number" disabled class="errorE text-center form-control" value=0> </input></td>
                               </tr>
                               <tr id="rec-1" class="item text-center">
                                  <td class="sno">6.</td>
-                                 <td><input type="number" class="HR6 inputEn Hn" value="{{obserItem2.HR6}}"></td>
-                                 <td><input type="number" class="HR16 inputEn Hn" value="{{obserItem2.HR16}}"></td>
-                                 <td><input type="number" disabled class="Ec inputEn diffhr6" value="{{obserItem2.DiffHalfLoad.hd6}}"></td>
+                                 <td><input type="number" class="HR6 inputEn Hn" value=""></td>
+                                 <td><input type="number" class="HR16 inputEn Hn" value=""></td>
+                                 <td><input type="number" disabled class="Ec inputEn diffhr6" value=""></td>
                                  <td></td>
                               </tr>
                               <tr id="rec-1" class="item text-center">
                                  <td class="sno">7.</td>
-                                 <td><input type="number" class="HR7 inputEn Hn" value="{{obserItem2.HR7}}"></td>
-                                 <td><input type="number" class="HR17 inputEn Hn" value="{{obserItem2.HR17}}"></td>
-                                 <td><input type="number" disabled class="Ec inputEn diffhr7" value="{{obserItem2.DiffHalfLoad.hd7}}"></td>
+                                 <td><input type="number" class="HR7 inputEn Hn" value=""></td>
+                                 <td><input type="number" class="HR17 inputEn Hn" value=""></td>
+                                 <td><input type="number" disabled class="Ec inputEn diffhr7" value=""></td>
                                  <td></td>
                               </tr>
                               <tr id="rec-1" class="item text-center">
                                  <td class="sno">8.</td>
-                                 <td><input type="number" class="HR8 inputEn Hn" value="{{obserItem2.HR8}}"></td>
-                                 <td><input type="number" class="HR18 inputEn Hn" value="{{obserItem2.HR18}}"></td>
-                                 <td><input type="number" disabled class="Ec inputEn diffhr8" value="{{obserItem2.DiffHalfLoad.hd8}}"></td>
+                                 <td><input type="number" class="HR8 inputEn Hn" value=""></td>
+                                 <td><input type="number" class="HR18 inputEn Hn" value=""></td>
+                                 <td><input type="number" disabled class="Ec inputEn diffhr8" value=""></td>
                                  <td></td>
                               </tr>
                               <tr id="rec-1" class="item text-center">
                                  <td class="sno">9.</td>
-                                 <td><input type="number" class="HR9 inputEn Hn" value="{{obserItem2.HR9}}"></td>
-                                 <td><input type="number" class="HR19 inputEn Hn" value="{{obserItem2.HR19}}"></td>
-                                 <td><input type="number" disabled class="Ec inputEn diffhr9" value="{{obserItem2.DiffHalfLoad.hd9}}"></td>
+                                 <td><input type="number" class="HR9 inputEn Hn" value=""></td>
+                                 <td><input type="number" class="HR19 inputEn Hn" value=""></td>
+                                 <td><input type="number" disabled class="Ec inputEn diffhr9" value=""></td>
                                  <td></td>
                               </tr>
                               <tr id="rec-1" class="item text-center">
                                  <td class="sno">10.</td>
-                                 <td><input type="number" class="HR10 inputEn Hn" value="{{obserItem2.HR10}}"></td>
-                                 <td><input type="number" class="HR20 inputEn Hn" value="{{obserItem2.HR20}}"></td>
-                                 <td><input type="number" disabled class="Ec inputEn diffhr10" value="{{obserItem2.DiffHalfLoad.hd10}}"></td>
+                                 <td><input type="number" class="HR10 inputEn Hn" value=""></td>
+                                 <td><input type="number" class="HR20 inputEn Hn" value=""></td>
+                                 <td><input type="number" disabled class="Ec inputEn diffhr10" value=""></td>
                                  <td></td>
                               </tr>
                            </tbody>
@@ -659,7 +640,6 @@
                            <div class="col-sm-12">
                               <div class="form-group bmd-form-group">
                                  <div id="div_id_remarks" class="control-group">
-
                                  </div>
                               </div>
                            </div>
@@ -704,72 +684,72 @@
                            <tbody id="tbl_posts_body" class="FRitem">
                               <tr id="rec-1" class="item text-center">
                                  <td class="sno">1.</td>
-                                 <td><input type="number" class="FR1 inputEn Fn" value="{{obserItem2.FR1}}"></td>
-                                 <td><input type="number" class="FR11 inputEn Fn" value="{{obserItem2.FR11}}"></td>
-                                 <td><input type="number" disabled class="Ec inputEn diff_fr1" value="{{obserItem2.DiffFullLoad.fd1}}"></td>
+                                 <td><input type="number" class="FR1 inputEn Fn" value=""></td>
+                                 <td><input type="number" class="FR11 inputEn Fn" value=""></td>
+                                 <td><input type="number" disabled class="Ec inputEn diff_fr1" value=""></td>
                                  <td></td>
                               </tr>
                               <tr id="rec-1" class="item text-center">
                                  <td class="sno">2.</td>
-                                 <td><input type="number" class="FR2 inputEn Fn" value="{{obserItem2.FR2}}"></td>
-                                 <td><input type="number" class="FR12 inputEn Fn" value="{{obserItem2.FR12}}"></td>
-                                 <td><input type="number" disabled class="Ec inputEn diff_fr2" value="{{obserItem2.DiffFullLoad.fd2}}"></td>
+                                 <td><input type="number" class="FR2 inputEn Fn" value=""></td>
+                                 <td><input type="number" class="FR12 inputEn Fn" value=""></td>
+                                 <td><input type="number" disabled class="Ec inputEn diff_fr2" value=""></td>
                                  <td></td>
                               </tr>
                               <tr id="rec-1" class="item text-center">
                                  <td class="sno">3.</td>
-                                 <td><input type="number" class="FR3 inputEn Fn" value="{{obserItem2.FR3}}"></td>
-                                 <td><input type="number" class="FR13 inputEn Fn" value="{{obserItem2.FR13}}"></td>
-                                 <td><input type="number" disabled class="Ec inputEn diff_fr3" value="{{obserItem2.DiffFullLoad.fd3}}"></td>
+                                 <td><input type="number" class="FR3 inputEn Fn" value=""></td>
+                                 <td><input type="number" class="FR13 inputEn Fn" value=""></td>
+                                 <td><input type="number" disabled class="Ec inputEn diff_fr3" value=""></td>
                                  <td></td>
                               </tr>
                               <tr id="rec-1" class="item text-center">
                                  <td class="sno">4.</td>
-                                 <td><input type="number" class="FR4 inputEn Fn" value="{{obserItem2.FR4}}"></td>
-                                 <td><input type="number" class="FR14 inputEn Fn" value="{{obserItem2.FR14}}"></td>
-                                 <td><input type="number" disabled class="Ec inputEn diff_fr4" value="{{obserItem2.DiffFullLoad.fd4}}"></td>
+                                 <td><input type="number" class="FR4 inputEn Fn" value=""></td>
+                                 <td><input type="number" class="FR14 inputEn Fn" value=""></td>
+                                 <td><input type="number" disabled class="Ec inputEn diff_fr4" value=""></td>
                                  <td></td>
                               </tr>
                               <tr id="rec-1" class="item text-center">
                                  <td class="sno">5.</td>
-                                 <td><input type="number" class="FR5 inputEn Fn" value="{{obserItem2.FR5}}"></td>
-                                 <td><input type="number" class="FR15 inputEn Fn" value="{{obserItem2.FR15}}"></td>
-                                 <td><input type="number" disabled class="Ec inputEn diff_fr5" value="{{obserItem2.DiffFullLoad.fd5}}"></td>
+                                 <td><input type="number" class="FR5 inputEn Fn" value=""></td>
+                                 <td><input type="number" class="FR15 inputEn Fn" value=""></td>
+                                 <td><input type="number" disabled class="Ec inputEn diff_fr5" value=""></td>
                                  <td class="text-center"><input id="diFF" type="number" disabled class="errorE text-center form-control" value=0> </input></td>
                               </tr>
                               <tr id="rec-1" class="item text-center">
                                  <td class="sno">6.</td>
-                                 <td><input type="number" class="FR6 inputEn Fn" value="{{obserItem2.FR6}}"></td>
-                                 <td><input type="number" class="FR16 inputEn Fn" value="{{obserItem2.FR16}}"></td>
-                                 <td><input type="number" disabled class="Ec inputEn diff_fr6" value="{{obserItem2.DiffFullLoad.fd6}}"></td>
+                                 <td><input type="number" class="FR6 inputEn Fn" value=""></td>
+                                 <td><input type="number" class="FR16 inputEn Fn" value=""></td>
+                                 <td><input type="number" disabled class="Ec inputEn diff_fr6" value=""></td>
                                  <td></td>
                               </tr>
                               <tr id="rec-1" class="item text-center">
                                  <td class="sno">7.</td>
-                                 <td><input type="number" class="FR7 inputEn Fn" value="{{obserItem2.FR7}}"></td>
-                                 <td><input type="number" class="FR17 inputEn Fn" value="{{obserItem2.FR17}}"></td>
-                                 <td><input type="number" disabled class="Ec inputEn diff_fr7" value="{{obserItem2.DiffFullLoad.fd7}}"></td>
+                                 <td><input type="number" class="FR7 inputEn Fn" value=""></td>
+                                 <td><input type="number" class="FR17 inputEn Fn" value=""></td>
+                                 <td><input type="number" disabled class="Ec inputEn diff_fr7" value=""></td>
                                  <td></td>
                               </tr>
                               <tr id="rec-1" class="item text-center">
                                  <td class="sno">8.</td>
-                                 <td><input type="number" class="FR8 inputEn Fn" value="{{obserItem2.FR8}}"></td>
-                                 <td><input type="number" class="FR18 inputEn Fn" value="{{obserItem2.FR18}}"></td>
-                                 <td><input type="number" disabled class="Ec inputEn diff_fr8" value="{{obserItem2.DiffFullLoad.fd8}}"></td>
+                                 <td><input type="number" class="FR8 inputEn Fn" value=""></td>
+                                 <td><input type="number" class="FR18 inputEn Fn" value=""></td>
+                                 <td><input type="number" disabled class="Ec inputEn diff_fr8" value=""></td>
                                  <td></td>
                               </tr>
                               <tr id="rec-1" class="item text-center">
                                  <td class="sno">9.</td>
-                                 <td><input type="number" class="FR9 inputEn Fn" value="{{obserItem2.FR9}}"></td>
-                                 <td><input type="number" class="FR19 inputEn Fn" value="{{obserItem2.FR19}}"></td>
-                                 <td><input type="number" disabled class="Ec inputEn diff_fr9" value="{{obserItem2.DiffFullLoad.fd9}}"></td>
+                                 <td><input type="number" class="FR9 inputEn Fn" value=""></td>
+                                 <td><input type="number" class="FR19 inputEn Fn" value=""></td>
+                                 <td><input type="number" disabled class="Ec inputEn diff_fr9" value=""></td>
                                  <td></td>
                               </tr>
                               <tr id="rec-1" class="item text-center">
                                  <td class="sno">10.</td>
-                                 <td><input type="number" class="FR10 inputEn Fn" value="{{obserItem2.FR10}}"></td>
-                                 <td><input type="number" class="FR20 inputEn Fn" value="{{obserItem2.FR20}}"></td>
-                                 <td><input type="number" disabled class="Ec inputEn diff_fr10" value="{{obserItem2.DiffFullLoad.fd10}}"></td>
+                                 <td><input type="number" class="FR10 inputEn Fn" value=""></td>
+                                 <td><input type="number" class="FR20 inputEn Fn" value=""></td>
+                                 <td><input type="number" disabled class="Ec inputEn diff_fr10" value=""></td>
                                  <td></td>
                               </tr>
                            </tbody>
