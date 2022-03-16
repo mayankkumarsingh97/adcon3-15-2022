@@ -1,0 +1,1778 @@
+{% block content %}
+{% load crispy_forms_tags %}
+{% load static %}
+<style>
+   .inputEn {
+   outline: 0;
+   border-width: 0 0 1px;
+   border-color: #495057;
+   width: 200px;
+   margin-top:10px
+   }
+   .mydel{
+   /* background-color: rgb(214, 228, 228) !important; */
+   border: 2px solid blue;
+   }
+   .float{
+   position:fixed;
+   width:60px;
+   height:60px;
+   bottom:40px;
+   right:40px;
+   background-color:rgb(220 35 102);
+   color:rgb(255, 255, 255);
+   border-radius:50px;
+   text-align:center;
+   box-shadow: 2px 2px 3px #999;
+   z-index: 10000;
+   /* border: 2px solid red; */
+   }
+   .my-float{
+   margin-top:22px;
+   }
+</style>
+<a class="subMButt float">
+<i style= "color:#fff;" class="fa fa-user my-float"></i>
+</a>
+<a class="saveObs float" style = "margin-right:72px">
+<i style= "color:#fff;" class="fa fa-save my-float"></i>
+</a>
+<a class="fetchButton float" style = "margin-right:144px">
+<i style= "color:#fff;" class="fa fa-exchange my-float"></i>
+</a>
+<a class="ye01 float" style = "margin-right:216px">
+<i style= "color:#fff;" class="fa fa-plus my-float"></i>
+</a>
+<div class="container-fluid">
+<div class="row">
+   <div class="col-md-12 p-4">
+      <div class="card">
+         <h4 class="card-title font-weight-normal ml-3 mt-3 mb-3"><i class="fa fa-thermometer mr-2" style="font-size:24px"></i>Temprature & Humidity</h4>
+         <div class="card-body">
+            <div class="row">
+               <div class="col-md-4 col-sm-4">
+                  <div class="form-group">
+                     {{ electrothermal.temp1|as_crispy_field }}
+                  </div>
+               </div>
+               <div class="col-md-4 col-sm-4">
+                  <div class="form-group">
+                     {{ electrothermal.temp3|as_crispy_field }}
+                  </div>
+               </div>
+               <div class="col-md-4 col-sm-4">
+                  <div class="form-group">
+                     {{ electrothermal.rh1 |as_crispy_field }}
+                  </div>
+               </div>
+            </div>
+
+         </div>
+      </div>
+   </div>
+</div>
+<div class="content" id="et-container">
+   <div  class="container-fluid main-et themain mainsN">
+      <div class="row">
+         <div class="col-12"  id="section01">
+            <div class="card ">
+               <div class="card-header card-header-rose card-header-icon">
+                  <div class="card-icon">
+                     <i class="material-icons">mail_outline</i>
+                  </div>
+                  <h4 class="card-title">Calibration Observation Mass(Weight)</h4>
+
+               </div>
+               <div class="card-body ">
+                  <div class="row mainetIT">
+                     <div class="col-md-12 itemTY">
+                        <div class="card-body itemTYCard">
+                           <div class="row">
+                              <div class="col-6">
+                                 <tr>
+                                    <td class="text-rose">Mass Value</td>
+                                    <td>
+                                       <div class="form-group form-group-inline"><input id="lc_duc" type="text" class="form-control lc_duc" name="" disabled value=""></div>
+                                    </td>
+                                 </tr>
+                                 <div class="form-group">
+                                 </div>
+                              </div>
+                              <div class="col-6">
+                                 <tr>
+                                    <td class="text-rose">Least Count (Weighing Balance)</td>
+                                    <td>
+                                       <div class="form-group form-group-inline"><input id="least_count" type="text" class="form-control least_count" name="" value=""></div>
+                                    </td>
+                                 </tr>
+                                 <div class="form-group">
+                                 </div>
+                              </div>
+                           </div>
+
+                           <div class="row">
+                              <div class="col-3">
+                                 <tr>
+                                    <td class="text-rose">ρa</td>
+                                    <td>
+                                       <div class="form-group form-group-inline"><input id="lc_duc" type="text" class="form-control va" name="" value="" placeholder="Only kg/m3"></div>
+                                    </td>
+                                 </tr>
+                                 <div class="form-group">
+                                 </div>
+                              </div>
+                              <div class="col-3">
+                                 <tr>
+                                    <td class="text-rose">ρr</td>
+                                    <td>
+                                       <div class="form-group form-group-inline"><input id="least_count" type="text" class="form-control vr" name="" value="" placeholder="Only kg/m3"></div>
+                                    </td>
+                                 </tr>
+                                 <div class="form-group">
+                                 </div>
+                              </div>
+                              <div class="col-3">
+                                 <tr>
+                                    <td class="text-rose">ρt</td>
+                                    <td>
+                                       <div class="form-group form-group-inline"><input id="least_count" type="text" class="form-control vt" name="" value="" placeholder="Only kg/m3"></div>
+                                    </td>
+                                 </tr>
+                                 <div class="form-group">
+                                 </div>
+                              </div>
+                              <div class="col-3">
+                                 <tr>
+                                    <td class="text-rose">ρo</td>
+                                    <td>
+                                       <div class="form-group form-group-inline"><input id="least_count" type="text" class="form-control vo" name="" value="" placeholder="Only kg/m3"></div>
+                                    </td>
+                                 </tr>
+                                 <div class="form-group">
+                                 </div>
+                              </div>
+                           </div>
+                           <br>
+                           <br>
+                            <div class="row">
+                             <div class="col-md-12">
+                               <div class="form-group coolAddress">
+                                   <label for="sel1">Select Weights</label>
+                                   <select class="form-control" id="sel1">
+                                       <option>------</option>
+                                   </select>
+                               </div>
+                             </div>
+
+                           </div>
+
+                           <table class="table table-bordered" id="tbl_posts">
+                              <thead>
+                                 <tr>
+                                    <th>S.No.</th>
+                                    <th>{{primary_intru}} Mass Value</th>
+                                    <th>Unit Used</th>
+                                    <th class="text-center">
+                                       Actual observation value {{secondry_intru}}
+                                       <table style="border:none; width: 100%;">
+                                          <thead>
+                                             <tr>
+                                                <td>S1</td>
+                                                <td>U1</td>
+                                                <td>U2</td>
+                                                <td>S2</td>
+                                             </tr>
+                                          </thead>
+                                       </table>
+                                    </th>
+                                    <th>Unit Used</th>
+                                    <th class="text-center">Diff.</th>
+                                    <th class="text-center">Avg. Diff</th>
+                                    <th>Conv. Mass</th>
+                                    <th>Action</th>
+                                 </tr>
+                              </thead>
+                              <tfoot>
+                              </tfoot>
+                              <tbody id="tbl_posts_body">
+                                 <tr id="rec-1" class="mainitem">
+                                    <td class="sno"><span class="sn">1</span>.</td>
+                                    <td><input class="form-control stdv rangeN"  value=""></td>
+                                    <td>
+                                       <select class="text-center form-control nomUnit" data-style="btn btn-link" >
+                                          {% for m, n in weighing_unit %}
+                                          <option value="{{m}}">{{n}}</option>
+                                          {% endfor %}
+                                       </select>
+                                    </td>
+                                    <td class="obsin inpn">
+                                       <table>
+                                          <tr>
+                                             <td>
+                                               <table>
+                                                 <tr>
+                                                   <td>
+                                                     <input id="obs1" class="form-control obsNM obs11" value="">
+                                                   </td>
+                                                 </tr>
+                                                 <tr>
+                                                   <td>
+                                                     <input id="obs1" class="form-control obsNM obs12" value="">
+                                                   </td>
+                                                 </tr>
+                                                 <tr>
+                                                   <td>
+                                                     <input id="obs1" class="form-control obsNM obs13" value="">
+                                                   </td>
+                                                 </tr>
+                                                 <tr>
+                                                   <td>
+                                                     <input id="obs1" class="form-control obsNM obs14" value="">
+                                                   </td>
+                                                 </tr>
+                                                 <tr>
+                                                   <td>
+                                                     <input id="obs1" class="form-control obsNM obs15" value="">
+                                                   </td>
+                                                 </tr>
+                                               </table>
+                                             </td>
+
+                                             <td>
+                                               <table>
+                                                 <tr>
+                                                   <td>
+                                                     <input id="obs1" class="form-control obsNM obs21" value="">
+                                                   </td>
+                                                 </tr>
+                                                 <tr>
+                                                   <td>
+                                                     <input id="obs1" class="form-control obsNM obs22" value="">
+                                                   </td>
+                                                 </tr>
+                                                 <tr>
+                                                   <td>
+                                                     <input id="obs1" class="form-control obsNM obs23" value="">
+                                                   </td>
+                                                 </tr>
+                                                 <tr>
+                                                   <td>
+                                                     <input id="obs1" class="form-control obsNM obs24" value="">
+                                                   </td>
+                                                 </tr>
+                                                 <tr>
+                                                   <td>
+                                                     <input id="obs1" class="form-control obsNM obs25" value="">
+                                                   </td>
+                                                 </tr>
+                                               </table>
+                                             </td>
+
+                                             <td>
+                                               <table>
+                                                 <tr>
+                                                   <td>
+                                                     <input id="obs1" class="form-control obsNM obs31" value="">
+                                                   </td>
+                                                 </tr>
+                                                 <tr>
+                                                   <td>
+                                                     <input id="obs1" class="form-control obsNM obs32" value="">
+                                                   </td>
+                                                 </tr>
+                                                 <tr>
+                                                   <td>
+                                                     <input id="obs1" class="form-control obsNM obs33" value="">
+                                                   </td>
+                                                 </tr>
+                                                 <tr>
+                                                   <td>
+                                                     <input id="obs1" class="form-control obsNM obs34" value="">
+                                                   </td>
+                                                 </tr>
+                                                 <tr>
+                                                   <td>
+                                                     <input id="obs1" class="form-control obsNM obs35" value="">
+                                                   </td>
+                                                 </tr>
+                                               </table>
+                                             </td>
+
+                                             <td>
+                                               <table>
+                                                 <tr>
+                                                   <td>
+                                                     <input id="obs1" class="form-control obsNM obs41" value="">
+                                                   </td>
+                                                 </tr>
+                                                 <tr>
+                                                   <td>
+                                                     <input id="obs1" class="form-control obsNM obs42" value="">
+                                                   </td>
+                                                 </tr>
+                                                 <tr>
+                                                   <td>
+                                                     <input id="obs1" class="form-control obsNM obs43" value="">
+                                                   </td>
+                                                 </tr>
+                                                 <tr>
+                                                   <td>
+                                                     <input id="obs1" class="form-control obsNM obs44" value="">
+                                                   </td>
+                                                 </tr>
+                                                 <tr>
+                                                   <td>
+                                                     <input id="obs1" class="form-control obsNM obs45" value="">
+                                                   </td>
+                                                 </tr>
+                                               </table>
+                                             </td>
+
+                                          </tr>
+                                       </table>
+                                    </td>
+                                    <td>
+                                       <select id="obsUnit" class="text-center form-control obsUnit" data-style="btn btn-link" >
+                                          {% for m, n in weighing_unit %}
+                                          <option value="{{m}}">{{n}}</option>
+                                          {% endfor %}
+                                       </select>
+                                    </td>
+                                    <td>
+                                      <table>
+                                        <tr>
+                                          <td>
+                                            <input id="obs1" class="form-control dff1" disabled value="">
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td>
+                                            <input id="obs1" class="form-control dff2" disabled value="">
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td>
+                                            <input id="obs1" class="form-control dff3" disabled value="">
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td>
+                                            <input id="obs1" class="form-control dff4" disabled value="">
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td>
+                                            <input id="obs1" class="form-control dff5" disabled value="">
+                                          </td>
+                                        </tr>
+                                      </table>
+                                    </td>
+                                    <td><input  type="number" id="" disabled class="fiveavg form-control" value=0> </input></td>
+                                    <td><input type="number" disabled class="massVALUE form-control" value=0> </input></td>
+                                    <td><a class="btn btn-xs delete-record btn-rose btn-link" data-id="1">X</a></td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                        <div class="card-footer text-right">
+                           <div class="col-sm-12">
+                           </div>
+                        </div>
+                        <div style="display:none;">
+                           <table id="sample_table">
+                              <tr id="cc" class="item">
+                                 <td class="sno"><span class="sn">1</span>.</td>
+                                 <td class="instr" >
+                                    <table>
+                                       <tr>
+                                          <td>Std Value A</td>
+                                       </tr>
+                                       <tr>
+                                          <td>UUC Value B</td>
+                                       </tr>
+                                       <tr>
+                                          <td>Std Value A'</td>
+                                       </tr>
+                                    </table>
+                                 </td>
+                                 <td class="obsin">
+                                    <table>
+                                       <tr>
+                                          <td>{{ observMIt.Std_Value_A_1 }}</td>
+                                       </tr>
+                                       <tr>
+                                          <td>{{ observMIt.uuc_value_b_1 }}</td>
+                                       </tr>
+                                       <tr>
+                                          <td>{{ observMIt.Std_Value_A1 }}</td>
+                                       </tr>
+                                    </table>
+                                 </td>
+                                 <td><input class="form-control totalE" disabled value="0"></td>
+                                 <td><input class="form-control leastE" disabled value="0"></td>
+                                 <td><input class="form-control totalF" disabled value="0"></td>
+                                 <!-- <td><input class="form-control reportZ"  value="0"></td> -->
+                                 <td><input class="form-control reportX obsx" disabled value="0"></td>
+                                 <td><a class="btn btn-xs delete-record btn-rose btn-link" data-id="1">X</a></td>
+                              </tr>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="row p-3">
+         <div class="card ">
+            <div class="card-header card-header-rose card-header-icon">
+               <div class="card-icon">
+                  <i class="material-icons">mail_outline</i>
+               </div>
+               <h4 class="card-title">Calibration Observation Sheet Weight</h4>
+            </div>
+            <div class="card-body ">
+               <div class="row">
+                  <div class="col-md-12">
+                     <div class="card-body ">
+                        <table class="table table-bordered" id="tbl_posts">
+                           <thead>
+                              <tr>
+                                 <th>S.No.</th>
+                                 <th>{{primary_intru}} Mass Value</th>
+                                 <th>Unit Used</th>
+                                 <th class="text-center">
+                                    Actual observation value {{secondry_intru}}
+                                    <table style="border:none; width: 100%;">
+                                       <thead>
+                                          <tr>
+                                             <td>X1</td>
+                                             <td>X2</td>
+                                             <td>X3</td>
+                                             <td>X4</td>
+                                             <td>X5</td>
+                                          </tr>
+                                       </thead>
+                                    </table>
+                                 </th>
+                                 <th>Unit Used</th>
+                                 <th>Average (in g)</th>
+                                 <th>Error UUC-Std (in g)</th>
+                                 <!-- <th>Std. Deviation(in g) </th> -->
+                                 <th>Uncertainty</th>
+                                 <th>Action</th>
+                              </tr>
+                           </thead>
+                           <tfoot>
+                           </tfoot>
+                           <tbody id="tbl_posts_body">
+                              <tr id="rec-1" class="mainitem">
+                                 <td class="sno"><span class="sn">1</span>.</td>
+                                 <td><input class="form-control stdv rangeN"  value=""></td>
+                                 <td>
+                                    <select class="text-center form-control nomUnit" data-style="btn btn-link" >
+                                       {% for m, n in weighing_unit %}
+                                       <option value="{{m}}">{{n}}</option>
+                                       {% endfor %}
+                                    </select>
+                                 </td>
+                                 <td class="obsin">
+                                    <table>
+                                       <tr>
+                                          <td><input id="obs1" class="form-control obsNM obs1" disabled  value=""></td>
+                                          <td><input id="obs2" class="form-control obsNM obs2" disabled  value=""></td>
+                                          <td><input id="obs3" class="form-control obsNM obs3" disabled  value=""></td>
+                                          <td><input id="obs4" class="form-control obsNM obs4" disabled  value=""></td>
+                                          <td><input id="obs5" class="form-control obsNM obs5" disabled  value=""></td>
+                                       </tr>
+                                    </table>
+                                 </td>
+                                 <td>
+                                    <select id="obsUnit" class="text-center form-control obsUnit" data-style="btn btn-link" >
+                                       {% for m, n in weighing_unit %}
+                                       <option value="{{m}}">{{n}}</option>
+                                       {% endfor %}
+                                    </select>
+                                 </td>
+                                 <td><input id="obsAvg" class="form-control totalE obsAvg" disabled value="0"></td>
+                                 <!-- <td><input type="number" disabled class="totalE form-control" value=0> </input></td> -->
+                                 <td><input  type="number" id="" disabled class="errorE form-control" value=0> </input></td>
+                                 <td><input id="uncertainP" type="number" disabled class="deviation form-control" value=0> </input></td>
+                                 <td><a class="btn btn-xs delete-record btn-rose btn-link" data-id="1">X</a></td>
+                              </tr>
+                           </tbody>
+                        </table>
+                        <div class="row">
+                           <div class="col-sm-12">
+                              <div class="form-group bmd-form-group">
+                                 {% csrf_token %}
+                                 <div id="div_id_remarks" class="control-group">
+                                    <label for="id_remarks" class="control-label ">
+                                    Remarks
+                                    </label>
+                                    <div class="controls">
+                                       <textarea name="remarks" cols="40" rows="10" class="form-control textarea" id="id_remarks"></textarea>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<script src="{% static 'js/core/jquery.min.js' %}"></script>
+<!-- ------------------------------------------================================= -->
+<div   id="second"   class="col-md-12 themain" style="display: none;">
+   <div class="row">
+      <div class="col-12"  id="section01">
+         <div class="card">
+            <div class="container ">
+
+               <div class="row justify-content-end">
+                  <div class="col-md-2 mt-5">
+                     <div id="myid" class="btn btn-info mydel">delete</div>
+                  </div>
+               </div>
+            </div>
+            <div class="card-header card-header-rose card-header-icon">
+               <div class="card-icon">
+                  <i class="material-icons">mail_outline</i>
+               </div>
+               <h4 class="card-title">Calibration Observation Mass(Weight)</h4>
+               <div class="well clearfix">
+                  <!-- <a id="addPhase" class="btn pull-left  btn-success text-white" data-added="0">Add Cycle</a> -->
+                  <!-- <a class="btn pull-right add-record btn-success text-white" data-added="0">Add Observation Record</a> -->
+               </div>
+            </div>
+            <div class="card-body ">
+               <div class="row mainetIT">
+                  <div class="col-md-12 itemTY">
+                     <div class="card-body itemTYCard">
+                        <div class="row">
+                           <div class="col-6">
+                              <tr>
+                                 <td class="text-rose">Mass Value</td>
+                                 <td>
+                                    <div class="form-group form-group-inline"><input id="lc_duc" type="text" class="form-control lc_duc" name="" disabled value=""></div>
+                                 </td>
+                              </tr>
+                              <div class="form-group">
+                              </div>
+                           </div>
+                           <div class="col-6">
+                              <tr>
+                                 <td class="text-rose">Least Count</td>
+                                 <td>
+                                    <div class="form-group form-group-inline"><input id="least_count" type="text" class="form-control least_count" name="" value=""></div>
+                                 </td>
+                              </tr>
+                              <div class="form-group">
+                              </div>
+                           </div>
+                        </div>
+
+                        <div class="row">
+                           <div class="col-3">
+                              <tr>
+                                 <td class="text-rose">ρa</td>
+                                 <td>
+                                    <div class="form-group form-group-inline"><input id="lc_duc" type="text" class="form-control va" name="" value="" placeholder="Only kg/m3"></div>
+                                 </td>
+                              </tr>
+                              <div class="form-group">
+                              </div>
+                           </div>
+                           <div class="col-3">
+                              <tr>
+                                 <td class="text-rose">ρr</td>
+                                 <td>
+                                    <div class="form-group form-group-inline"><input id="least_count" type="text" class="form-control vr" name="" value="" placeholder="Only kg/m3"></div>
+                                 </td>
+                              </tr>
+                              <div class="form-group">
+                              </div>
+                           </div>
+                           <div class="col-3">
+                              <tr>
+                                 <td class="text-rose">ρt</td>
+                                 <td>
+                                    <div class="form-group form-group-inline"><input id="least_count" type="text" class="form-control vt" name="" value="" placeholder="Only kg/m3"></div>
+                                 </td>
+                              </tr>
+                              <div class="form-group">
+                              </div>
+                           </div>
+                           <div class="col-3">
+                              <tr>
+                                 <td class="text-rose">ρo</td>
+                                 <td>
+                                    <div class="form-group form-group-inline"><input id="least_count" type="text" class="form-control vo" name="" value="" placeholder="Only kg/m3"></div>
+                                 </td>
+                              </tr>
+                              <div class="form-group">
+                              </div>
+                           </div>
+                        </div>
+                        <br>
+                        <br>
+                         <div class="row">
+                             <div class="col-md-12">
+                               <div class="form-group coolAddress">
+
+                                 <label for="sel1">Select Weights</label>
+         <select class="form-control" id="sel1">
+           <option>------</option>
+
+         </select>
+
+                               </div>
+                             </div>
+
+                           </div>
+                        <table class="table table-bordered" id="tbl_posts">
+                           <thead>
+                              <tr>
+                                 <th>S.No.</th>
+                                 <th>{{primary_intru}} Mass Value</th>
+                                 <th>Unit Used</th>
+                                 <th class="text-center">
+                                    Actual observation value {{secondry_intru}}
+                                    <table style="border:none; width: 100%;">
+                                       <thead>
+                                          <tr>
+                                             <td>S1</td>
+                                             <td>U1</td>
+                                             <td>U2</td>
+                                             <td>S2</td>
+                                          </tr>
+                                       </thead>
+                                    </table>
+                                 </th>
+                                 <th>Unit Used</th>
+                                 <th class="text-center">Diff.</th>
+                                 <th class="text-center">Avg. Diff</th>
+                                 <th>Conv. Mass</th>
+                                 <th>Action</th>
+                              </tr>
+                           </thead>
+                           <tfoot>
+                           </tfoot>
+                           <tbody id="tbl_posts_body">
+                              <tr id="rec-1" class="mainitem">
+                                 <td class="sno"><span class="sn">1</span>.</td>
+                                 <td><input class="form-control stdv rangeN"  value=""></td>
+                                 <td>
+                                    <select class="text-center form-control nomUnit" data-style="btn btn-link" >
+                                       {% for m, n in weighing_unit %}
+                                       <option value="{{m}}">{{n}}</option>
+                                       {% endfor %}
+                                    </select>
+                                 </td>
+                                 <td class="obsin inpn">
+                                    <table>
+                                       <tr>
+                                          <td>
+                                            <table>
+                                              <tr>
+                                                <td>
+                                                  <input id="obs1" class="form-control obsNM obs11" value="">
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td>
+                                                  <input id="obs1" class="form-control obsNM obs12" value="">
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td>
+                                                  <input id="obs1" class="form-control obsNM obs13" value="">
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td>
+                                                  <input id="obs1" class="form-control obsNM obs14" value="">
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td>
+                                                  <input id="obs1" class="form-control obsNM obs15" value="">
+                                                </td>
+                                              </tr>
+                                            </table>
+                                          </td>
+
+                                          <td>
+                                            <table>
+                                              <tr>
+                                                <td>
+                                                  <input id="obs1" class="form-control obsNM obs21" value="">
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td>
+                                                  <input id="obs1" class="form-control obsNM obs22" value="">
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td>
+                                                  <input id="obs1" class="form-control obsNM obs23" value="">
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td>
+                                                  <input id="obs1" class="form-control obsNM obs24" value="">
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td>
+                                                  <input id="obs1" class="form-control obsNM obs25" value="">
+                                                </td>
+                                              </tr>
+                                            </table>
+                                          </td>
+
+                                          <td>
+                                            <table>
+                                              <tr>
+                                                <td>
+                                                  <input id="obs1" class="form-control obsNM obs31" value="">
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td>
+                                                  <input id="obs1" class="form-control obsNM obs32" value="">
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td>
+                                                  <input id="obs1" class="form-control obsNM obs33" value="">
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td>
+                                                  <input id="obs1" class="form-control obsNM obs34" value="">
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td>
+                                                  <input id="obs1" class="form-control obsNM obs35" value="">
+                                                </td>
+                                              </tr>
+                                            </table>
+                                          </td>
+
+                                          <td>
+                                            <table>
+                                              <tr>
+                                                <td>
+                                                  <input id="obs1" class="form-control obsNM obs41" value="">
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td>
+                                                  <input id="obs1" class="form-control obsNM obs42" value="">
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td>
+                                                  <input id="obs1" class="form-control obsNM obs43" value="">
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td>
+                                                  <input id="obs1" class="form-control obsNM obs44" value="">
+                                                </td>
+                                              </tr>
+                                              <tr>
+                                                <td>
+                                                  <input id="obs1" class="form-control obsNM obs45" value="">
+                                                </td>
+                                              </tr>
+                                            </table>
+                                          </td>
+
+                                       </tr>
+                                    </table>
+                                 </td>
+                                 <td>
+                                    <select id="obsUnit" class="text-center form-control obsUnit" data-style="btn btn-link" >
+                                       {% for m, n in weighing_unit %}
+                                       <option value="{{m}}">{{n}}</option>
+                                       {% endfor %}
+                                    </select>
+                                 </td>
+                                 <td>
+                                   <table>
+                                     <tr>
+                                       <td>
+                                         <input id="obs1" class="form-control dff1" disabled value="">
+                                       </td>
+                                     </tr>
+                                     <tr>
+                                       <td>
+                                         <input id="obs1" class="form-control dff2" disabled value="">
+                                       </td>
+                                     </tr>
+                                     <tr>
+                                       <td>
+                                         <input id="obs1" class="form-control dff3" disabled value="">
+                                       </td>
+                                     </tr>
+                                     <tr>
+                                       <td>
+                                         <input id="obs1" class="form-control dff4" disabled value="">
+                                       </td>
+                                     </tr>
+                                     <tr>
+                                       <td>
+                                         <input id="obs1" class="form-control dff5" disabled value="">
+                                       </td>
+                                     </tr>
+                                   </table>
+                                 </td>
+                                 <td><input  type="number" id="" disabled class="fiveavg form-control" value=0> </input></td>
+                                 <td><input id="uncertainP" type="number" disabled class="massVALUE form-control" value=0> </input></td>
+                                 <td><a class="btn btn-xs delete-record btn-rose btn-link" data-id="1">X</a></td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                     <div class="card-footer text-right">
+                        <div class="col-sm-12">
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="row p-3">
+      <div class="card ">
+         <div class="card-header card-header-rose card-header-icon">
+            <div class="card-icon">
+               <i class="material-icons">mail_outline</i>
+            </div>
+            <h4 class="card-title">Calibration Observation Sheet Weight</h4>
+         </div>
+         <div class="card-body ">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="card-body ">
+                     <table class="table table-bordered" id="tbl_posts">
+                        <thead>
+                           <tr>
+                              <th>S.No.</th>
+                              <th>{{primary_intru}} Mass Value</th>
+                              <th>Unit Used</th>
+                              <th class="text-center">
+                                 Actual observation value {{secondry_intru}}
+                                 <table style="border:none; width: 100%;">
+                                    <thead>
+                                       <tr>
+                                          <td>X1</td>
+                                          <td>X2</td>
+                                          <td>X3</td>
+                                          <td>X4</td>
+                                          <td>X5</td>
+                                       </tr>
+                                    </thead>
+                                 </table>
+                              </th>
+                              <th>Unit Used</th>
+                              <th>Average (in g)</th>
+                              <th>Error UUC-Std (in g)</th>
+                              <!-- <th>Std. Deviation(in g) </th> -->
+                              <th>Uncertainty</th>
+                              <th>Action</th>
+                           </tr>
+                        </thead>
+                        <tfoot>
+                        </tfoot>
+                        <tbody id="tbl_posts_body">
+                           <tr id="rec-1" class="mainitem">
+                              <td class="sno"><span class="sn">1</span>.</td>
+                              <td><input class="form-control stdv rangeN"  value=""></td>
+                              <td>
+                                 <select class="text-center form-control nomUnit" data-style="btn btn-link" >
+                                    {% for m, n in weighing_unit %}
+                                    <option value="{{m}}">{{n}}</option>
+                                    {% endfor %}
+                                 </select>
+                              </td>
+                              <td class="obsin">
+                                 <table>
+                                    <tr>
+                                       <td><input class="form-control obsNM obs1" disabled  value=""></td>
+                                       <td><input class="form-control obsNM obs2" disabled  value=""></td>
+                                       <td><input class="form-control obsNM obs3" disabled  value=""></td>
+                                       <td><input class="form-control obsNM obs4" disabled  value=""></td>
+                                       <td><input class="form-control obsNM obs5" disabled  value=""></td>
+                                    </tr>
+                                 </table>
+                              </td>
+                              <td>
+                                 <select id="obsUnit" class="text-center form-control obsUnit" data-style="btn btn-link" >
+                                    {% for m, n in weighing_unit %}
+                                    <option value="{{m}}">{{n}}</option>
+                                    {% endfor %}
+                                 </select>
+                              </td>
+                              <td><input id="obsAvg" class="form-control totalE obsAvg" disabled value="0"></td>
+                              <!-- <td><input type="number" disabled class="totalE form-control" value=0> </input></td> -->
+                              <td><input  type="number" id="" disabled class="errorE form-control" value=0> </input></td>
+                              <td><input id="uncertainP" type="number" disabled class="deviation form-control" value=0> </input></td>
+                              <td><a class="btn btn-xs delete-record btn-rose btn-link" data-id="1">X</a></td>
+                           </tr>
+                        </tbody>
+                     </table>
+                     <div class="row">
+                        <div class="col-sm-12">
+                           <div class="form-group bmd-form-group">
+                              {% csrf_token %}
+                              <div id="div_id_remarks" class="control-group">
+                                 <label for="id_remarks" class="control-label ">
+                                 Remarks
+                                 </label>
+                                 <div class="controls">
+                                    <textarea name="remarks" cols="40" rows="10" class="form-control textarea" id="id_remarks"></textarea>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- ---------------------------js ----------------------------------------------------------- -->
+<script>
+   jQuery(document).delegate('.ye01', 'click', function(e) {
+
+
+
+     $('#et-container').last().append($('#second').first().clone().addClass('mainsN').show());
+
+       });
+</script>
+<script>
+   jQuery(document).delegate('a.delete-record', 'click', function(e) {
+         e.preventDefault();
+         var didConfirm = confirm("Are you sure You want to delete");
+         if (didConfirm == true) {
+            var id = jQuery(this).attr('data-id');
+            var targetDiv = jQuery(this).attr('targetDiv');
+            jQuery('#rec-' + id).remove();
+
+         //regnerate index number on table
+         $('#tbl_posts_body tr').each(function(index) {
+
+            $(this).find('span.sn').html(index+1);
+         });
+         return true;
+      } else {
+         return false;
+      }
+      });
+
+
+
+
+
+      $("#subMButt256").click(function( event ) {
+        // alert("hello")
+      var arrayOI = []
+      $("tr.item").each(function() {
+        var dictOI = {};
+        // alert($(this).find('#id_calibratedBy').val());
+        // dictOI["itemName"] = $(this).find(".wo_uuc").attr('selected', true);
+        dictOI['sn'] = $(this).find('.sn').text();
+        dictOI["uuc"] = $(this).find('.nomVal').val();
+        dictOI["x1"] = $(this).find('table').find('.obs1').val();
+        dictOI["x2"] = $(this).find('table').find('.obs2').val();
+        dictOI["x3"] = $(this).find('table').find('.obs3').val();
+
+
+
+        if(dictOI["sn"] != '' && dictOI["uuc"]!= '' && dictOI["x1"]!='' && dictOI["x2"]!='' && dictOI["x3"]!=''){
+        arrayOI.push(dictOI);
+
+      }
+        });
+
+
+           // xyz= "Pressure-Gauge-Certificate/" + {{certi.id}}
+          $.ajax({
+                type:'POST',
+                url:'',
+                data:{
+                    env_cond:$('#id_environmental_condition').val(),
+                    start_temp:$('#id_starting_temp').val(),
+                    end_temp:$('#id_ending_temp').val(),
+                    remarks:$('#id_remarks').val(),
+                    calibration_performed_at: $('#calibration_performed_at').val(),
+
+                    'arrayOID[]':  JSON.stringify(arrayOI),
+
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                    action: 'post'
+                },
+                data_type : 'html',
+                success: function (data) {
+                  // location.reload();
+
+                    window.location.href = "/Certificate-Dashboard";
+                },
+                error: function (data) {
+                    console.log("Got an error dude " + data);
+                }
+            });
+
+      // alert( "Handler for .submit() called." );
+    });
+
+
+
+
+   $('#addPhase').on('click', function(){
+   $('.mainetIT').append($('.itemTY'));
+   });
+
+
+
+   jQuery(document).delegate('#addPhase', 'click', function(e) {
+
+
+   $('.mainetIT').append($('.itemTY').html());
+
+   <!-- var content = jQuery('#sa mple_table > tbody > tr').not("#tbl_posts tbody tr table "); -->
+
+   <!-- size = jQuery('#tbl_posts >tbody >tr').length + 1, -->
+   <!-- element = null, -->
+   <!-- element = content.clone(true); -->
+   <!-- element.attr('id', 'rec-'+size); -->
+   <!-- element.attr('class', 'item'); -->
+
+   <!-- element.find('.delete-record').attr('data-id', size); -->
+
+   <!-- element.find('.sn').html(size); -->
+
+
+
+
+   });
+
+</script>
+<script>
+   $(document).delegate('#subMButt2444', 'click', function(e) {
+
+   arrayOI = []
+
+   $("tr.apme").each(function() {
+
+   if($(this).find('.obs1').val()!=''){
+
+
+
+   sfn_id= '{{ srfN.id }}';
+   id_calibration_performed_at = $("#id_calibration_performed_at").val()
+   cal_observation_no = $("#id_cal_observation_number").val()
+   remarks =$("#id_remarks").val()
+
+
+   var dictOI = {};
+                // alert($(this).find('#id_calibratedBy').val());
+                // dictOI["itemName"] = $(this).find(".wo_uuc").attr('selected', true);
+                dictOI['sn'] = $(this).find('.sn').text();
+                dictOI["duc_id"] = '{{ srfN.instrument.id }}';
+                dictOI["lc_duc"] = $(this).closest('.itemTYCard').find('.lc_duc').val();
+                dictOI["lc_duc_unit"] = $(this).closest('.itemTYCard').find('.lc_duc_unit').val();
+                dictOI["lc_duc_unit_parameter"] = $(this).closest('.itemTYCard').find('.lc_duc_unit_parameter').val();
+                dictOI["cal_point"] = $(this).find('.nomVal').val();
+                dictOI["cal_point_unit"] = $(this).closest('table').find('.nomValUnit option:selected').val();
+                dictOI["obs_point_unit"] = $(this).closest('table').find(".obsValUnit option:selected").val();
+                dictOI["obs1"] = $(this).find('.obs1').val();
+                dictOI["obs2"] = $(this).find('.obs2').val();
+                dictOI["obs3"] = $(this).find('.obs3').val();
+                dictOI["x1"] = $(this).find('.x1').val();
+                dictOI["x2"] = $(this).find('.x2').val();
+                dictOI["x3"] = $(this).find('.x3').val();
+                if(dictOI["lc_duc"] != '' && dictOI["obs_point_unit"]!= '' && dictOI["obs1"]!='' && dictOI["obs2"]!='' && dictOI["obs3"]!='' && dictOI["x1"]!='' && dictOI["x2"]!='' && dictOI["x3"]!=''){
+                arrayOI.push(dictOI);
+
+              }
+
+   }
+
+   });
+
+
+   $.ajax({
+   type: 'POST',
+   url : '{% url 'observation:weightitemtestView' %}',
+   context: this,
+
+   data:{
+
+   sfn_id : sfn_id,
+   id_calibration_performed_at: id_calibration_performed_at,
+   cal_observation_no : cal_observation_no,
+   remarks:remarks,
+
+    'arrayOID[]':  JSON.stringify(arrayOI),
+   csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+   action: 'post',
+   },
+   data_type : 'html',
+        success: function (data) {
+                  console.log(data)
+                  window.location.href='{% url 'observation:observationDashboard'  %}'
+                },
+                error: function (data) {
+                    console.log("Got an error dude " + data);
+                }
+   });
+
+
+     });
+
+</script>
+
+<script>
+   $('#et-container').on('change','input.obsNM', function () {
+     nom_val = $(this).closest(".mainitem").find(".rangeN").val();
+
+     nomUnit = $(this).closest(".mainitem").find('.nomUnit option:selected').val();
+     obsUnit = $(this).closest(".mainitem").find('.obsUnit option:selected').val();
+
+
+                   val1 = $(this).closest(".inpn").find(".obs11").val();
+                    val2 = $(this).closest(".inpn").find(".obs12").val();
+                    val3 = $(this).closest(".inpn").find(".obs13").val();
+                    val4 = $(this).closest(".inpn").find(".obs14").val();
+                     val5 = $(this).closest(".inpn").find(".obs15").val();
+                     val6 = $(this).closest(".inpn").find(".obs21").val();
+                     val7 = $(this).closest(".inpn").find(".obs22").val();
+                      val8 = $(this).closest(".inpn").find(".obs23").val();
+                      val9 = $(this).closest(".inpn").find(".obs24").val();
+                      val10 = $(this).closest(".inpn").find(".obs25").val();
+                      val11 = $(this).closest(".inpn").find(".obs31").val();
+                       val12 = $(this).closest(".inpn").find(".obs32").val();
+                       val13 = $(this).closest(".inpn").find(".obs33").val();
+                       val14 = $(this).closest(".inpn").find(".obs34").val();
+                        val15 = $(this).closest(".inpn").find(".obs35").val();
+                        val16 = $(this).closest(".inpn").find(".obs41").val();
+                        val17 = $(this).closest(".inpn").find(".obs42").val();
+                         val18 = $(this).closest(".inpn").find(".obs43").val();
+                         val19 = $(this).closest(".inpn").find(".obs44").val();
+                         val20 = $(this).closest(".inpn").find(".obs45").val();
+
+                         Fv1 = (parseFloat(val6) - parseFloat(val1))
+                         Fv2 = (parseFloat(val7) - parseFloat(val2))
+                         Fv3 = (parseFloat(val8) - parseFloat(val3))
+                         Fv4 = (parseFloat(val9) - parseFloat(val4))
+                         Fv5 = (parseFloat(val10) - parseFloat(val5))
+
+                         Fv6 = (parseFloat(val11) - parseFloat(val16))
+                         Fv7 = (parseFloat(val12) - parseFloat(val17))
+                         Fv8 = (parseFloat(val13) - parseFloat(val18))
+                         Fv9 = (parseFloat(val14) - parseFloat(val19))
+                         Fv10 = (parseFloat(val15) - parseFloat(val20))
+
+                         sum1 = (Fv1+Fv6)/2
+                         sum2 = (Fv2+Fv7)/2
+                         sum3 = (Fv3+Fv8)/2
+                         sum4 = (Fv4+Fv9)/2
+                         sum5 = (Fv5+Fv10)/2
+
+                         fiveavg = (sum1+sum2+sum3+sum4+sum5)/5
+
+                         DFV1 = $(this).closest(".mainitem").find(".dff1").val(sum1);
+                         DFV2 = $(this).closest(".mainitem").find(".dff2").val(sum2);
+                         DFV3 = $(this).closest(".mainitem").find(".dff3").val(sum3);
+                         DFV4 = $(this).closest(".mainitem").find(".dff4").val(sum4);
+                         DFV5 = $(this).closest(".mainitem").find(".dff5").val(sum5);
+
+                         DFV11 = $(this).closest(".themain").find(".obs1").val(sum1);
+                         DFV21 = $(this).closest(".themain").find(".obs2").val(sum2);
+                         DFV31 = $(this).closest(".themain").find(".obs3").val(sum3);
+                         DFV41 = $(this).closest(".themain").find(".obs4").val(sum4);
+                         DFV51 = $(this).closest(".themain").find(".obs5").val(sum5);
+
+
+                         nom_val1= $(this).closest(".themain").find(".rangeN").val(nom_val);
+                         nom_val2= $(this).closest(".themain").find(".obsAvg").val(fiveavg);
+
+                         Fav = $(this).closest(".mainitem").find(".fiveavg").val(fiveavg);
+
+
+
+
+                          arraycert = []
+
+
+
+                          $(this).closest(".themain").find('.instru_itm :selected').each(function() {
+
+                            var certitem = $(this).val();
+
+
+                            var dictInstru = {};
+                            dictInstru['certitem'] =certitem
+                            if(dictInstru["certitem"] != ''){
+                               arraycert.push(dictInstru);
+                               }
+
+                             });
+
+
+
+                          vt = $(this).closest(".themain").find('.vt').val()
+                          vr = $(this).closest(".themain").find('.vr').val()
+                          va = $(this).closest(".themain").find('.va').val()
+                          vo = $(this).closest(".themain").find('.vo').val()
+
+                          $.ajax({
+
+                            type:'POST',
+                            url:'{% url 'observation:weightcertificatemassvalue' %}',
+                            context: this,
+                            data:{
+                            nom_val: nom_val,
+                            nomUnit:nomUnit,
+                            vt:vt,
+                            vr:vr,
+                            obsUnit:obsUnit,
+                            va:va,
+                            vo:vo,
+                            'arrayIN[]': JSON.stringify(arraycert),
+
+                            csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                            action: 'post'
+                            },
+                            data_type : 'html',
+                            success: function (data) {
+                            console.log(data)
+
+
+                            val1 = parseFloat(JSON.parse(data)["valunN"])
+                            val2 = fiveavg
+                            valN = val1+val2
+
+
+                            nn = $(this).closest(".mainitem").find(".massVALUE").val(valN);
+
+
+
+                            },
+                            error: function (data) {
+                              console.log("Got an error dude " + data);
+                                  }
+                              });
+
+
+
+
+
+
+   });
+
+</script>
+
+<script>
+   $(document).delegate('.fetchButton', 'click', function(e) {
+
+     arrayInstru = []
+     scopes =  $('#scope option:selected').val();
+
+        $('.instruselect').each(function() {
+        var instrument = $(this).find(' option:selected').val();
+
+        var dictInstru = {};
+        dictInstru['instrument'] =instrument
+        if(dictInstru["instrument"] != ''){
+         arrayInstru.push(dictInstru);
+         }
+
+         });
+
+    $(".mainsN").each(function() {
+    arraycert = []
+
+
+    $(this).find('.instru_itm :selected').each(function() {
+
+
+      var certitem = $(this).val();
+
+
+      var dictInstru = {};
+      dictInstru['certitem'] =certitem
+      if(dictInstru["certitem"] != ''){
+         arraycert.push(dictInstru);
+         }
+
+       });
+
+      if($(this).find('.obs1').val()!=''){
+      duc_id='{{ srfN.instrument.id }}';
+      cal_point = $(this).find('.rangeN').val()
+      mass = $(this).find('.lc_duc').val()
+
+
+
+      least_count=$(this).find('.least_count').val()
+      x1 = $(this).find('.obs1').val()
+      x2 = $(this).find('.obs2').val()
+      x3 = $(this).find('.obs3').val()
+      x4 = $(this).find('.obs4').val()
+      x5 = $(this).find('.obs5').val()
+      obsUnit= $(this).find('.obsUnit option:selected').val();
+      nomUnit= $(this).find('.nomUnit option:selected').val();
+
+      vt = $(this).find('.vt').val();
+      vr = $(this).find('.vr').val();
+      va = $(this).find('.va').val();
+      vo = $(this).find('.vo').val();
+
+
+
+      $.ajax({
+        type:'POST',
+        url:'{% url 'observation:weightUncertainView' %}',
+        context: this,
+        data:{
+        duc_id: duc_id,
+        cal_point: cal_point,
+        mass:mass,
+        least_count:least_count,
+        vt:vt,
+        vr:vr,
+        x1: x1,
+        x2: x2,
+        x3: x3,
+        x4: x4,
+        x5: x5,
+        scopes:scopes,
+        nomUnit:nomUnit,
+        obsUnit:obsUnit,
+        'arrayIN[]': JSON.stringify(arrayInstru),
+        'arrayCIT[]': JSON.stringify(arraycert),
+
+        csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+        action: 'post'
+        },
+        data_type : 'html',
+        success: function (data) {
+        console.log(data)
+
+
+
+        unc = $(this).find('#uncertainP').val(JSON.parse(data)["U"])
+        unc = $(this).find('.errorE').val(JSON.parse(data)["erro_std_uuc"])
+
+        },
+        error: function (data) {
+          console.log("Got an error dude " + data);
+              }
+          });
+
+
+    }
+  });
+    });
+
+
+
+
+
+
+</script>
+
+
+<script>
+   $(document).delegate('.saveObs', 'click', function(e) {
+
+     sfn_id= '{{ srfN.id }}';
+     scopes =  $('#scope option:selected').val();
+
+
+     duc_id = '{{ srfN.instrument.id }}';
+
+     arrayInstru = []
+     check_source_measure = '{{check_source_measure}}';
+
+    $('.instruselect').each(function() {
+    var instrument = $(this).find(' option:selected').val();
+
+    var dictInstru = {};
+    dictInstru['instrument'] =instrument
+    if(dictInstru["instrument"] != ''){
+     arrayInstru.push(dictInstru);
+     }
+
+     });
+
+
+     arrayOI = []
+      var certitem = '';
+
+       $(".mainsN").each(function() {
+
+       arraycert = []
+
+       var dictInstru = {};
+       $(this).find('.instru_itm :selected').each(function() {
+       certitem = $(this).val();
+
+
+      dictInstru['certitem'] =certitem
+      if(dictInstru["certitem"] != ''){
+         arraycert.push(certitem);
+         }
+
+       });
+
+
+         if($(this).find('.obs1').val()!=''){
+
+           var dictOI = {};
+
+           dictOI["arraycert"] = arraycert;
+
+           dictOI["duc_id"] = '{{ srfN.instrument.id }}';
+           dictOI["cal_point"] = $(this).find('.rangeN').val();
+           dictOI["mass"] = $(this).find('.lc_duc').val();
+           dictOI["least_count"] = $(this).find('.least_count').val();
+           dictOI["x1"] = $(this).find('.obs1').val();
+           dictOI["x2"] =$(this).find('.obs2').val();
+           dictOI["x3"] = $(this).find('.obs3').val();
+           dictOI["x4"] = $(this).find('.obs4').val();
+           dictOI["x5"] = $(this).find('.obs5').val();
+           dictOI["nom_val"] = $(this).find('.rangeN').val();
+           dictOI["obsUnit"] = $(this).find('.obsUnit option:selected').val();
+           dictOI["nomUnit"] = $(this).find('.nomUnit option:selected').val();
+
+           dictOI["x11"] = $(this).find('.obs11').val();
+           dictOI["x12"] = $(this).find('.obs12').val();
+           dictOI["x13"] = $(this).find('.obs13').val();
+           dictOI["x14"] = $(this).find('.obs14').val();
+           dictOI["x15"] = $(this).find('.obs15').val();
+
+           dictOI["x21"] = $(this).find('.obs21').val();
+           dictOI["x22"] = $(this).find('.obs22').val();
+           dictOI["x23"] = $(this).find('.obs23').val();
+           dictOI["x24"] = $(this).find('.obs24').val();
+           dictOI["x25"] = $(this).find('.obs25').val();
+
+           dictOI["x31"] = $(this).find('.obs31').val();
+           dictOI["x32"] = $(this).find('.obs32').val();
+           dictOI["x33"] = $(this).find('.obs33').val();
+           dictOI["x34"] = $(this).find('.obs34').val();
+           dictOI["x35"] = $(this).find('.obs35').val();
+
+           dictOI["x41"] = $(this).find('.obs41').val();
+           dictOI["x42"] = $(this).find('.obs42').val();
+           dictOI["x43"] = $(this).find('.obs43').val();
+           dictOI["x44"] = $(this).find('.obs44').val();
+           dictOI["x45"] = $(this).find('.obs45').val();
+
+           dictOI["vt"] = $(this).find('.vt').val();
+           dictOI["vr"] = $(this).find('.vr').val();
+           dictOI["va"] = $(this).find('.va').val();
+           dictOI["vo"] = $(this).find('.vo').val();
+
+
+
+
+           if(dictOI["duc_id"] != '' && dictOI["cal_point"]!= '' && dictOI["mass"]!='' && dictOI["least_count"]!='' && dictOI["obs2"]!='' && dictOI["obs3"]!='' && dictOI["obs4"]!='' && dictOI["obs5"]!='' && dictOI["obsUnit"]!='' && dictOI["nomUnit"]!='' && dictOI["x11"]!='' && dictOI["x12"]!='' && dictOI["x13"]!=' ' && dictOI["x14"]!='' && dictOI["x15"]!='' && dictOI["x21"]!='' && dictOI["x22"]!='' && dictOI["x23"]!='' && dictOI["x24"]!='' && dictOI["x25"]!='' && dictOI["x31"]!='' && dictOI["x32"]!='' && dictOI["x33"]!='' && dictOI["x34"]!='' && dictOI["x35"]!='' && dictOI["x41"]!='' && dictOI["x42"]!='' && dictOI["x43"]!='' && dictOI["x44"]!='' && dictOI["x45"]!='' ){
+          arrayOI.push(dictOI);
+
+          }
+
+        }
+
+        });
+
+
+        $.ajax({
+        type: 'POST',
+        url : '{% url 'observation:weightitemtestView' %}',
+        context: this,
+
+        data:{
+
+        'sfn_id' : sfn_id,
+        'duc_id':duc_id,
+        'button_clicked' : 'Save',
+        'scopes':scopes,
+        'vt':vt,
+        'vr':vr,
+        'va':va,
+        'vo':vo,
+        'starting_temp': $('#id_temp1').val(),
+        'end_temp': $('#id_temp3').val(),
+        'humidity': $('#id_rh1').val(),
+        'calibration_performed_at': $('#id_calibration_performed_at').val(),
+        'arrayOID[]':  JSON.stringify(arrayOI),
+        'arrayIN[]': JSON.stringify(arrayInstru),
+        'arrayCIT[]': JSON.stringify(arraycert),
+        'cal_observation_no' : $('#id_cal_observation_number').val(),
+
+
+
+
+        csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+        action: 'post',
+        },
+        data_type : 'html',
+             success: function (data) {
+                       console.log(data)
+                       window.location.href='{% url 'observation:observationDashboard'  %}'
+                     },
+                     error: function (data) {
+                         console.log("Got an error dude " + data);
+                     }
+        });
+
+
+
+
+
+     });
+
+</script>
+
+<script>
+   $(document).delegate('.subMButt', 'click', function(e) {
+
+     sfn_id= '{{ srfN.id }}';
+     scopes =  $('#scope option:selected').val();
+     duc_id = '{{ srfN.instrument.id }}';
+
+     arrayInstru = []
+     check_source_measure = '{{check_source_measure}}';
+
+    $('.instruselect').each(function() {
+    var instrument = $(this).find(' option:selected').val();
+
+    var dictInstru = {};
+    dictInstru['instrument'] =instrument
+    if(dictInstru["instrument"] != ''){
+     arrayInstru.push(dictInstru);
+     }
+
+     });
+
+
+     arrayOI = []
+      var certitem = '';
+
+       $(".mainsN").each(function() {
+
+       arraycert = []
+
+       var dictInstru = {};
+       $(this).find('.instru_itm :selected').each(function() {
+       certitem = $(this).val();
+
+
+      dictInstru['certitem'] =certitem
+      if(dictInstru["certitem"] != ''){
+         arraycert.push(certitem);
+         }
+
+       });
+
+
+         if($(this).find('.obs1').val()!=''){
+
+           var dictOI = {};
+
+           dictOI["arraycert"] = arraycert;
+
+           dictOI["duc_id"] = '{{ srfN.instrument.id }}';
+           dictOI["cal_point"] = $(this).find('.rangeN').val();
+           dictOI["mass"] = $(this).find('.lc_duc').val();
+           dictOI["least_count"] = $(this).find('.least_count').val();
+           dictOI["x1"] = $(this).find('.obs1').val();
+           dictOI["x2"] =$(this).find('.obs2').val();
+           dictOI["x3"] = $(this).find('.obs3').val();
+           dictOI["x4"] = $(this).find('.obs4').val();
+           dictOI["x5"] = $(this).find('.obs5').val();
+           dictOI["nom_val"] = $(this).find('.rangeN').val();
+           dictOI["obsUnit"] = $(this).find('.obsUnit option:selected').val();
+           dictOI["nomUnit"] = $(this).find('.nomUnit option:selected').val();
+
+           dictOI["x11"] = $(this).find('.obs11').val();
+           dictOI["x12"] = $(this).find('.obs12').val();
+           dictOI["x13"] = $(this).find('.obs13').val();
+           dictOI["x14"] = $(this).find('.obs14').val();
+           dictOI["x15"] = $(this).find('.obs15').val();
+
+           dictOI["x21"] = $(this).find('.obs21').val();
+           dictOI["x22"] = $(this).find('.obs22').val();
+           dictOI["x23"] = $(this).find('.obs23').val();
+           dictOI["x24"] = $(this).find('.obs24').val();
+           dictOI["x25"] = $(this).find('.obs25').val();
+
+           dictOI["x31"] = $(this).find('.obs31').val();
+           dictOI["x32"] = $(this).find('.obs32').val();
+           dictOI["x33"] = $(this).find('.obs33').val();
+           dictOI["x34"] = $(this).find('.obs34').val();
+           dictOI["x35"] = $(this).find('.obs35').val();
+
+           dictOI["x41"] = $(this).find('.obs41').val();
+           dictOI["x42"] = $(this).find('.obs42').val();
+           dictOI["x43"] = $(this).find('.obs43').val();
+           dictOI["x44"] = $(this).find('.obs44').val();
+           dictOI["x45"] = $(this).find('.obs45').val();
+
+           dictOI["vt"] = $(this).find('.vt').val();
+           dictOI["vr"] = $(this).find('.vr').val();
+           dictOI["va"] = $(this).find('.va').val();
+           dictOI["vo"] = $(this).find('.vo').val();
+
+
+
+
+           if(dictOI["duc_id"] != '' && dictOI["cal_point"]!= '' && dictOI["mass"]!='' && dictOI["least_count"]!='' && dictOI["obs2"]!='' && dictOI["obs3"]!='' && dictOI["obs4"]!='' && dictOI["obs5"]!='' && dictOI["obsUnit"]!='' && dictOI["nomUnit"]!='' && dictOI["x11"]!='' && dictOI["x12"]!='' && dictOI["x13"]!=' ' && dictOI["x14"]!='' && dictOI["x15"]!='' && dictOI["x21"]!='' && dictOI["x22"]!='' && dictOI["x23"]!='' && dictOI["x24"]!='' && dictOI["x25"]!='' && dictOI["x31"]!='' && dictOI["x32"]!='' && dictOI["x33"]!='' && dictOI["x34"]!='' && dictOI["x35"]!='' && dictOI["x41"]!='' && dictOI["x42"]!='' && dictOI["x43"]!='' && dictOI["x44"]!='' && dictOI["x45"]!='' ){
+          arrayOI.push(dictOI);
+
+          }
+
+        }
+
+        });
+
+
+        $.ajax({
+        type: 'POST',
+        url : '{% url 'observation:weightitemtestView' %}',
+        context: this,
+
+        data:{
+
+        'sfn_id' : sfn_id,
+        'duc_id':duc_id,
+        'button_clicked' : 'Submit',
+        'vt':vt,
+        'vr':vr,
+        'va':va,
+        'vo':vo,
+        'scopes':scopes,
+        'starting_temp': $('#id_temp1').val(),
+        'end_temp': $('#id_temp3').val(),
+        'humidity': $('#id_rh1').val(),
+        'calibration_performed_at': $('#id_calibration_performed_at').val(),
+        'arrayOID[]':  JSON.stringify(arrayOI),
+        'arrayIN[]': JSON.stringify(arrayInstru),
+        'arrayCIT[]': JSON.stringify(arraycert),
+        'cal_observation_no' : $('#id_cal_observation_number').val(),
+
+
+
+
+        csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+        action: 'post',
+        },
+        data_type : 'html',
+             success: function (data) {
+                       console.log(data)
+                       window.location.href='{% url 'observation:observationDashboard'  %}'
+                     },
+                     error: function (data) {
+                         console.log("Got an error dude " + data);
+                     }
+        });
+
+
+
+
+
+     });
+
+</script>
+
+
+<script>
+   jQuery(document).delegate('.mydel', 'click', function(e) {
+     alert('Are You Sure ?')
+     $(this).closest('.themain').remove()
+
+     });
+
+
+</script>
+
+
+    <script>
+
+  $(".instruselect").change(function () {
+
+    arrayInstru = []
+
+    $('.instruselect').each(function() {
+    var instrument = $(this).find(' option:selected').val();
+    var dictInstru = {};
+    dictInstru['instrument'] =instrument
+    if(dictInstru["instrument"] != ''){
+     arrayInstru.push(dictInstru);
+
+     $.ajax({
+       type: 'POST',
+       url: '{% url 'observation:getContact' %}',
+       data: {
+         'arrayIN[]': JSON.stringify(arrayInstru),
+         csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+         action: 'post',
+       },
+       success: function (data) {
+         console.log(data)
+         $(".coolAddress").html(data);
+       }
+
+     });
+
+     }
+     });
+
+});
+</script>
+
+    <script>
+
+
+
+        $(document).on('change', '.instru_itm', function(){
+
+
+
+
+        $(".mainetIT").each(function() {
+
+             mymass = 0
+
+        $(this).find(".instru_itm option:selected").map(function(){
+
+        mymass += parseFloat($(this).data('mass'))
+
+        });
+
+    $(this).find('.lc_duc').val(mymass)
+        });
+
+
+        });
+    </script>
+
+
+{% endblock %}
