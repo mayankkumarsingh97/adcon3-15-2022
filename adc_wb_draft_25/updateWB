@@ -1,0 +1,1017 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml"
+    xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+    <meta charset="utf-8">
+    <title>Observation</title>
+    <!-- utf-8 works for most cases -->
+    <meta name="viewport" content="width=device-width">
+    <!-- Forcing initial-scale shouldn't be necessary -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Use the latest (edge) version of IE rendering engine -->
+    <meta name="x-apple-disable-message-reformatting">
+    <!-- Disable auto-scale in iOS 10 Mail entirely -->
+    <title></title>
+
+    <!-- The title tag shows in email notifications, like Android 4.4. -->
+    <script src="https://unpkg.com/browse/pagedjs@0.2.0/dist/paged.polyfill.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,  700" rel="stylesheet">
+    <!-- CSS Reset : BEGIN -->
+
+    <!-- <script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js"></script> -->
+    <style>
+        body {
+            /* font-family: ui-monospace; */
+        }
+        .first td{
+          padding:4px 0px;
+        }
+        table {
+            /* counter-reset: Serial; */
+
+        }
+        .mayank:last-child(){
+            border-bottom: 1px solid red!important;
+        }
+        
+      .mayank{
+            border: none!important;
+        }
+        table {
+            border-collapse: collapse;
+        }
+        #masterT tr {
+            counter-increment: Serial;
+            /* Increment the Serial counter */
+            content: counter(Serial);
+            /* Display the counter */
+        }
+
+        h3 {
+            margin: 10px 0px;
+        }
+
+
+        .extra-spacing-tr {
+            height: 280px;
+        }
+
+        .extra-spacing2-tr {
+            height: 150px;
+        }
+
+        @page {
+            /* margin-left: 5in; // top margin for first page of paper */
+        }
+
+        @media print {
+            @page {
+                size: A4 portrait;
+                /* DIN A4 standard, Europe */
+                margin: 0;
+
+            }
+        }
+
+        /* td{
+          padding: 4px;
+        } */
+
+
+        @media print {
+         tasble, tbody , tr, thead{
+             page-break-after: auto;
+             page-break-inside: avoid;
+             /* margin-bottom: 20px !important; */
+         }
+     }
+     .mk{
+        border-collapse: collapse;
+     }
+    </style>
+</head>
+
+<body width="100%" style="margin: 0; height:100vh;  mso-line-height-rule: exactly;" onload="window.print()">
+    <div id="content">
+
+    </div>
+    <table style="border-collapse: collapse; margin-top:0px; " align="center" width="95%">
+        <thead style="margin-left: 100px">
+            <tr align="center">
+                <td width="10%"
+                    style="border-left: 1px solid #000;border-top:1px solid #000;border-bottom: 1px solid #000;">
+                    <img src="{% static 'logo.png' %}" alt="Logo" style="width:90px">
+                </td>
+                <td width="" colspan="2"
+                    style="padding: 10px;border-left: 1px solid #000;border-top: 1px solid #000;border-bottom: 1px solid #000;">
+                    <h3 style="text-align:center;font-size: 18px;">Adcon Test and Calibration Lab</h3>
+                    <span style="text-align: center;float: center;">ISO/ IEC : 17025 :2017</span>
+                </td>
+                <td colspan="2"
+                    style="width: 30%;padding-right: 40px; padding-left: 40px;border-left: 1px solid #000;border-top: 1px solid #000;border-bottom: 1px solid #000;border-right: 1px solid #000;">
+                    <p style="line-height: 1;font-size: 12px;"> &nbsp; &nbsp;&nbsp; &nbsp;ATCL/FM/21(ME-23);04&nbsp; &nbsp;&nbsp; &nbsp;</p>
+            </td>
+
+            </tr>
+            <tr style="text-align: center; font-size: 14px; " height="50px;" width="100%" align="center">
+                <td colspan="4" valign="center" style="margin-top: 30px;"><u>
+                        <h3>Calibration Observation Sheet for Weighing Balance</h3>
+                    </u></td>
+                
+            </tr>
+           
+            <tr style="border: 1px solid #000; font-size: 14px; text-align: center;">
+
+                <td style="border: 1px solid #000;border-top: 1px solid #000; padding: 4px;" width="25%">Job Number</td>
+                
+                <td style="border: 1px solid #000;border-top: 1px solid #000; padding: 4px;border-right: 1px solid #000;"
+                    width="25%"></td>
+
+                <td style="border: 1px solid #000; padding: 4px;" width="25%"><span id="">Pages
+                </span> </td>
+                <td style="border: 1px solid #000; padding: 4px;"  width="25%"><span id="pageCount"></td>
+            </tr>
+            <tr>
+              <td>
+                <br>
+              </td>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td colspan="4">
+                    <!-- job number  -->
+                    <table style="width: 100%; margin-top: -30px;" align="center" class="first">
+                        <tbody align="center">
+
+                            <tr>
+                                <td colspan="4" style="height: 10px;"></td>
+                            </tr>
+
+                            <tr style="font-size: 14px; ">
+                                <td style="border-left: 1px solid #000;border-top: 1px solid #000;" width="25%">
+                                    Nomenclature {{anyItem.range}}</td>
+                                <td style="border-left: 1px solid #000;border-top: 1px solid #000;" width="25%"></td>
+                                <td style="border-left: 1px solid #000;border-top: 1px solid #000;" width="25%">
+                                    Condition of UUC</td>
+                                <td style="border-left: 1px solid #000;border-top: 1px solid #000;border-right: 1px solid #000;"
+                                    width="25%"></td>
+                            </tr>
+                            <tr style="font-size: 14px;">
+                                <td style="border-top:1px solid #000;border-left:1px solid #000;width:25%;">Type</td>
+                                <td style="border-top: 1px solid #000;border-left:1px solid #000;width:25%;"></td>
+                                <td style="border-top: 1px solid #000;border-left: 1px solid #000;width:25%;">Cali./Operating
+                                    Range.</td>
+                                <td
+                                    style="border-right:1px solid #000;border-top:1px solid #000;border-left:1px solid #000; width:25%;">
+                                </td>
+                            </tr>
+
+                            <tr style="font-size: 14px;">
+                                <td style="border-left: 1px solid #000;border-top: 1px solid #000;" width="25%">Range
+                                </td>
+                                <td style="border-left: 1px solid #000;border-top: 1px solid #000;" width="25%"></td>
+                                <td style="border-left: 1px solid #000;border-top: 1px solid #000;" width="25%">Serial
+                                    No</td>
+                                <td style="border-left: 1px solid #000;border-top: 1px solid #000;border-right: 1px solid #000;"
+                                    width="25%"></td>
+                            </tr>
+                            <tr style="font-size: 14px;">
+                                <td style="border-left: 1px solid #000;border-top: 1px solid #000;" width="25%">
+                                    Resolution/ LC</td>
+                                <td style="border-left: 1px solid #000;border-top: 1px solid #000;" width="25%"></td>
+                                <td style="border-left: 1px solid #000;border-top: 1px solid #000;" width="25%">Party ID
+                                    Mark No</td>
+                                <td style="border-left: 1px solid #000;border-top: 1px solid #000;border-right: 1px solid #000;"
+                                    width="25%"></td>
+                            </tr>
+                            <tr style="font-size: 14px;">
+                                <td style="border-left: 1px solid #000;border-top: 1px solid #000;" width="25%">Make &
+                                    Model</td>
+                                <td style="border-left: 1px solid #000;border-top: 1px solid #000;" width="25%"></td>
+                                <td style="border-left: 1px solid #000;border-top: 1px solid #000;" width="25%">Location
+                                </td>
+                                <td style="border-left: 1px solid #000;border-top: 1px solid #000;border-right: 1px solid #000;"
+                                    width="25%"></td>
+                            </tr>
+                            <tr style="font-size: 14px;">
+                                <td style="border-left: 1px solid #000;border-top: 1px solid #000;" width="25%">Zero
+                                    Error </td>
+
+
+
+
+                                <td style="border-left: 1px solid #000;border-top: 1px solid #000;" width="25%"></td>
+                                <td style="border-left: 1px solid #000;border-top: 1px solid #000;" width="25%">
+                                    Calibrated on</td>
+                                <td style="border-left: 1px solid #000;border-top: 1px solid #000;border-right: 1px solid #000;"
+                                    width="25%"></td>
+                            </tr>
+                            <tr style="font-size: 14px;">
+                                <td style="border-left: 1px solid #000;border-top: 1px solid #000;border-bottom: 1px solid #000;"
+                                    width="25%">Accuracy/Class</td>
+                                <td style="border-left: 1px solid #000;border-top: 1px solid #000;border-bottom: 1px solid #000;"
+                                    width="25%"></td>
+                                <td style="border-left: 1px solid #000;border-top: 1px solid #000;border-bottom: 1px solid #000;"
+                                    width="25%">Suggested due date</td>
+                                <td style="border-left: 1px solid #000;border-top: 1px solid #000;border-right: 1px solid #000;border-bottom: 1px solid #000;"
+                                    width="25%"></td>
+                            </tr>
+                            <tr style="font-size: 14px;">
+                                <td style="border-left: 1px solid #000;border: 1px solid #000;border-right: 1px solid #000;"
+                                    width="25%">Calibration Performed at</td>
+                                <td
+                                    style="border-left: 1px solid #000;border: 1px solid #000; border-right: 1px solid #000;">
+                                </td>
+                                <td style="border-left: 1px solid #000;border: 1px solid #000;border-right: 1px solid #000;"
+                                    width="25%">Calibration Procedure No.</td>
+                                <td
+                                    style="border-left: 1px solid #000;border: 1px solid #000; border-right: 1px solid #000;">
+                                </td>
+
+                            </tr>
+                            <!-- <tr>
+                                   <td style="text-align: left;" width="50%">
+                                      <p style="font-weight: 600;">Master / Standard equipment used</p>
+                                   </td>
+                            </tr> -->
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+
+
+            <tr style=" font-size: 15px; font-weight: 500; margin-top: 0px; " width="100%" align="left">
+                <td colspan="4" valign="center">
+                  <br>
+                    <strong style="margin: 0px;">Reference Equipment used</strong>
+                    <br>
+                </td>
+            </tr>
+            <tr>
+              <td colspan="4">
+
+                <table id="masterT" style="border-collapse: collapse; text-align: center; font-size: 14px;" align="center"  width="100%">
+                    <thead>
+                        <td style="border:1px solid #000; padding: 4px !important;">S. No.</td>
+                        <td style="border:1px solid #000; padding: 4px !important;">Nomenclature</td>
+                        <td style="border:1px solid #000; padding-left: 4px !important;">Make/Model</td>
+                        <td style="border:1px solid #000; padding-left: 4px !important;">Serial: ID No.</td>
+                        <td style="border:1px solid #000; padding-left: 4px !important;">Certificate No.</td>
+                        <td style="border:1px solid #000; padding-left: 4px !important;">Cal. Validity Date</td>
+                        <td style="border:1px solid #000; padding-left: 4px !important;">Calibration Agency</td>
+                    </thead>
+                    <tbody >
+                    
+                      
+
+                       <tr rowspan="3">
+                           <td style="border:1px solid #000;"><br></td>
+                           <td style="border:1px solid #000;"><br></td>
+                           <td style="border:1px solid #000;"><br></td>
+                           <td style="border:1px solid #000;"><br></td>
+                           <td style="border:1px solid #000;"><br></td>
+                           <td style="border:1px solid #000;"><br></td>
+                           <td style="border:1px solid #000;"><br></td>
+                       </tr>
+                    </tbody>
+                </table>
+            </td>
+
+        </tr>
+
+
+
+            <tr>
+                <td colspan="4">
+
+
+
+
+                                      <table align="center" width="100%" class="%" style="border-collapse: collapse; margin-top:5px; margin-bottom: -10px; font-size: 14px;">
+                                        <tr>
+                                            <td><b>Environmental Conditions</b></td>
+                                        </tr>
+                                          <tr>
+                                              <td style="width:33%">Starting Temp.  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; °C </td>
+                                              <!-- <td style="width:25%"><h4>Middle Temp.  {{ newtest.pressure_observation.first.temp2 }} °C </h4></td> -->
+                                              <td style="width:33%">Ending Temp.  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; °C </td>
+                                              <td style="width:33%">Average Temp. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; °C </td>
+                                          </tr>
+                                          <tr>
+                                              <td style="width:33%">Starting Humidity. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; % RH </td>
+                                              <!-- <td style="width:33%"><h4>Middle Humidity.  {{ newtest.et_observation.first.rh2 }} % RH </h4></td> -->
+                                              <td style="width:33%">Ending Humidity.  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; % RH </td>
+                                              <td style="width:33%">Average Humidity.  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; % RH </td>
+                                          </tr>
+                                      </table>
+                                    </td>
+                                    </tr>
+
+
+
+                                    <tr style=" font-size: 15px; font-weight: 500; margin-top: 0px; padding-top:0px;" width="100%" align="left">
+                                        <td colspan="4" valign="center">
+                                          <br>
+                                            <strong>Calibration Results</strong>
+                                            <br>
+                                            <br>
+                                          
+                                       
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                                    <tr>
+
+                                      <td colspan="4">
+                                    <!-- <table align="left" width="100%">
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="9" style="height: 18px;">
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table> -->
+
+            <!-- ----------------------------------------------------------------------------------------------                        
+            -----------------------------------------wb table to be append--------------------------------            
+            ----------------------------------------------------------------------------------------------                         -->
+
+
+            <table width="100%" border="1" align="center" style="text-align: center;">
+                <thead>
+                    <tr>
+                        <td rowspan="2">S.NO.</td>
+                        <td rowspan="2" width="10%">Nominal <br> Value  <br>of Weight</td>
+                        <td rowspan="2" width="10%">Certified<br> Value</td>
+                        <td colspan="4">Observed Value On Balance</td>
+                        <td rowspan="2" width="10%">Mean Observed Value</td>
+                        <td rowspan="2" width="10%">Correction</td>
+                        <td rowspan="2" width="10%">Linearity Error(Max. Of all the Correction)</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp; &#8593;  &nbsp;</td>
+                        <td> &nbsp; &#8595;  &nbsp;</td>
+                        <td> &nbsp; &#8593;  &nbsp;</td>     
+                        <td> &nbsp; &#8595;  &nbsp;</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in anyItems %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{i.nominal_value}}</td>
+                        <td></td>
+                        <td>{{i.observation_1}}</td>
+                        <td>{{i.observation_2}}</td>
+                        <td>{{i.observation_3}}</td>
+                        <td>{{i.observation_4}}</td>
+                        <td>{{i.avg_obs}}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    {% endfor %}
+                
+                
+
+
+                    
+                </tbody>
+            </table>
+            </td>
+
+        </tr>
+         
+        
+           <tr>
+               <td colspan="4">
+                <table border="1" width="100%" align="center" style='text-align: center;' valign="center">
+                    <tr><br><b>(A)Half Load:</b></tr>
+                    <br><br>
+                    <thead>
+                        <tr>
+                            <td>S.No</td>
+                            <td>Reading in weighing <br>
+                                balance at 454 No Load (Z) <br><br>
+                            </td>
+                            <td>
+                                Reading in weighing <br>
+                                balance at Half Load (R) <br><br>
+                            </td>
+                            <td>
+                                X=R-Z <br><br>
+                            </td>
+                            <td>
+                                (Repeatability/Standard Deviation <br> at Half Load)<br><br>
+                            </td>
+                        </tr>
+                    </thead>
+                    
+                   <tbody>
+                    <tr>
+                     <td style="background-color: aqua;">1</td>
+                     <td style="background-color: #ed5249;">{{anyItem.HR1}}</td>
+                     <td style="background-color: aqua;">{{anyItem.HR11}}</td>
+                     <td style="background-color: aquamarine;">{{anyItem.DiffHalfLoad.hd1}}</td>
+                     <td style="background-color: cadetblue;"></td>
+                    </tr>
+
+                    <tr>
+                        <td>2</td>
+                        <td>{{anyItem.HR2}}</td>
+                        <td>{{anyItem.HR12}}</td>
+                        <td>{{anyItem.DiffHalfLoad.hd2}}</td>
+                        <td></td>
+                       </tr>
+
+                       <tr>
+                        <td>3</td>
+                        <td>{{anyItem.HR3}}</td>
+                        <td>{{anyItem.HR13}}</td>
+                        <td>{{anyItem.DiffHalfLoad.hd3}}</td>
+                        <td></td>
+                       </tr>
+                       <tr>
+                        <td>4</td>
+                        <td>{{anyItem.HR4}}</td>
+                        <td>{{anyItem.HR14}}</td>
+                        <td>{{anyItem.DiffHalfLoad.hd4}}</td>
+                        <td></td>
+                       </tr>
+                       <tr>
+                        <td>5</td>
+                        <td>{{anyItem.HR5}}</td>
+                        <td>{{anyItem.HR15}}</td>
+                        <td>{{anyItem.DiffHalfLoad.hd5}}</td>
+                        <td></td>
+                       </tr>
+
+                       <tr>
+                        <td>6</td>
+                        <td>{{anyItem.HR6}}</td>
+                        <td>{{anyItem.HR16}}</td>
+                        <td>{{anyItem.DiffHalfLoad.hd6}}</td>
+                        <td></td>
+                       </tr>
+
+                       <tr>
+                        <td>7</td>
+                        <td>{{anyItem.HR7}}</td>
+                        <td>{{anyItem.HR17}}</td>
+                        <td>{{anyItem.DiffHalfLoad.hd7}}</td>
+                        <td></td>
+                       </tr>
+
+                       <tr>
+                        <td>8</td>
+                        <td>{{anyItem.HR8}}</td>
+                        <td>{{anyItem.HR18}}</td>
+                        <td>{{anyItem.DiffHalfLoad.hd8}}</td>
+                        <td></td>
+                       </tr>
+
+                       <tr>
+                        <td>9</td>
+                        <td>{{anyItem.HR9}}</td>
+                        <td>{{anyItem.HR19}}</td>
+                        <td>{{anyItem.DiffHalfLoad.hd9}}</td>
+                        <td></td>
+                       </tr>
+
+                       <tr>
+                        <td>10</td>
+                        <td>{{anyItem.HR10}}</td>
+                        <td>{{anyItem.HR20}}</td>
+                        <td>{{anyItem.DiffHalfLoad.hd20}}</td>
+                        <td></td>
+                       </tr>
+                   </tbody>
+                    
+                    
+                    
+                </table>
+               </td>
+           </tr>
+            
+
+           <tr>
+               <td colspan="4">
+                <table  border="1" width="100%" align="center" style='text-align: center; margin-top: -30px;'>
+              
+                    <tr><b>(B)Full Load:</b><br></tr>
+                    
+                    <br><br>
+                    <thead>
+                        <tr>
+                            <td>S.No</td>
+                            <td>Reading in weighing <br>
+                                balance at No Load (Z)<br><br>
+                            </td>
+                            <td>
+                                Reading in weighing <br>
+                                balance at Full Load (R)<br><br>
+                            </td>
+                            <td>
+                                X=R-Z<br><br>
+                            </td>
+                            <td>
+                                (Repeatability/Standard Deviation <br> at Full  Load)<br><br>
+                            </td>
+                        </tr>
+                    </thead>
+    
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>{{anyItem.FR1}}</td>
+                            <td>{{anyItem.FR11}}</td>
+                            <td>{{anyItem.DiffFullLoad.fd1}}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>{{anyItem.FR2}}</td>
+                            <td>{{anyItem.FR12}}</td>
+                            <td>{{anyItem.DiffFullLoad.fd2}}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>{{anyItem.FR3}}</td>
+                            <td>{{anyItem.FR13}}</td>
+                            <td>{{anyItem.DiffFullLoad.fd3}}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>{{anyItem.FR4}}</td>
+                            <td>{{anyItem.FR14}}</td>
+                            <td>{{anyItem.DiffFullLoad.fd4}}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>{{anyItem.FR5}}</td>
+                            <td>{{anyItem.FR15}}</td>
+                            <td>{{anyItem.DiffFullLoad.fd5}}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>{{anyItem.FR6}}</td>
+                            <td>{{anyItem.FR16}}</td>
+                            <td>{{anyItem.DiffFullLoad.fd6}}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>{{anyItem.FR7}}</td>
+                            <td>{{anyItem.FR17}}</td>
+                            <td>{{anyItem.DiffFullLoad.fd7}}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>{{anyItem.FR8}}</td>
+                            <td>{{anyItem.FR18}}</td>
+                            <td>{{anyItem.DiffFullLoad.fd8}}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>{{anyItem.FR9}}</td>
+                            <td>{{anyItem.FR19}}</td>
+                            <td>{{anyItem.DiffFullLoad.fd1}}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>{{anyItem.FR10}}</td>
+                            <td>{{anyItem.FR20}}</td>
+                            <td>{{anyItem.DiffFullLoad.fd1}}</td>
+                            <td></td>
+                        </tr>
+                     
+                    </tbody>
+                </table>
+               </td>
+           </tr>
+            <!-- yaha se copy kiya hu  -->
+
+        <tr><td><br></td></tr>
+
+            <!-- yaha se udnaa hai  -->
+             <tr>
+                <td colspan="4">
+                      <table border="1" width="100%" style="text-align: center;">
+                          <thead>
+                              <tr>
+                                  <td>Load</td>
+                                  <td>Location</td>
+                                  <td>Measured value on Balance</td>
+                                  <td>Mean Value</td>
+                                  <td>Diff.(H) of values <br> w.r.t M1</td>
+                              </tr>
+                          </thead>
+                          <tbody>
+                            
+                                <tr>
+                                    <td></td>
+                                    <td>1</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>2</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>3</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>4</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+
+                                <tr>
+                                    <td></td>
+                                    <td>5</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>  
+                                <tr>
+                                    <td></td>
+                                    <td>1</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>  <tr>
+                                    <td></td>
+                                    <td>5</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>  
+                                <tr>
+                                    <td></td>
+                                    <td>4</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>  <tr>
+                                    <td></td>
+                                    <td>3</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>2</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>1</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+
+
+
+                                
+                               
+                            </tbody>
+                          
+                      </table>
+                </td>
+             </tr>
+
+
+          
+
+    
+
+
+                                  <tr style="width: 100%;" >
+                                      <td colspan="4">
+                                          <table border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
+                                              <tr>
+                                                  <td><strong>Remarks :</strong></td>
+                                              </tr>
+
+                                          </table>
+                                      </td>
+                                  </tr>
+
+                                     <!-- <tr>
+                                    <td colspan="11" align="left">
+                                       <strong> Decision Rule: </strong> The UUC with ID <strong> &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  </strong> is found to be within the limits of acceptance criteria, &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; while making decision rule expanded uncertainty is fully taken into consideration.
+                                    </td>
+                                 </tr> -->
+
+
+
+        </tbody>
+
+            <tfoot valign="bottom">
+
+
+
+
+                             <tr>
+                                <td colspan="4">       <table border="0" valign="bottom" cellpadding="0" align="center" cellspacing="0" style="width: 95%;" >
+
+                                    <tr valign="bottom" style="text-align:center;width:100%;">
+                                        <td style="width:50%">
+                                          <br>
+                                          <br>
+                                          <br>
+                                          Calibrated by:</td>
+                                          <td style="width:50%">   <br>
+                                             <br>
+                                             <br>
+                                             Approved by:</td>
+                                        <!-- <td style="width: 50%;">Checked/ approved by:</td> -->
+                                    </tr>
+
+                                    <tr>
+                                      <td>
+                                        <br>
+                                      </td>
+                                    </tr>
+
+
+                                 <!-- <tr>
+                                     <td style="width: 50%;">Calibrated by:</td>
+                                     <td style="width: 50%;">Checked/ approved by:</td>
+                                 </tr>
+                                 <tr>
+                                  <td  style="width: 50%;">Calibration Engineer:</td>
+                                  <td  style="width: 50%;">Tech. Manager/Authorized Signatory:</td>
+                              </tr> -->
+
+                                </table> </td>
+                             </tr>
+
+                                </tfoot>
+    </table>
+
+
+
+                    
+
+              </body>
+
+    <!-- <table cellspacing="0" cellpadding="0" width="95%" align="center" style=""> -->
+    <!-- <thead>
+             <tr>
+                 <td>
+                     <div class="page-header-space" style="padding: 0px;"></div>
+                 </td>
+             </tr>
+             </thead> -->
+    <!-- <tbody> -->
+
+
+    <!-- <table style="border-collapse: collapse; " align="center" cellpadding="8" width="95%" >
+
+         </table> -->
+
+
+    <!-- </tbody> -->
+
+    <!-- <tfoot>
+
+       </tfoot> -->
+
+    <!-- </table> -->
+
+
+
+
+
+    <style>
+        .btn {
+            background-color: #ed5249;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 14px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 8px;
+        }
+
+        .btn1 {
+            background-color: green;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 14px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 8px;
+        }
+    </style>
+
+</body>
+
+
+
+<script type="text/javascript">
+    // window.print();
+ 
+     // $( document ).ready(function() {
+     //         window.print();
+     //         // PrintPanel()
+     //
+     //          });
+ </script>
+ 
+ <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+     integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"> </script>
+ 
+ <script type="text/javascript">
+ 
+     // alertT = $("#totalCount").offset().top
+     const element2 = $(".totalCount")
+ 
+     function getPosition(element) {
+         var xPosition = 0;
+         var yPosition = 0;
+ 
+         while (element) {
+             xPosition += (element.offsetLeft - element.scrollLeft + element.clientLeft);
+             yPosition += (element.offsetTop - element.scrollTop + element.clientTop);
+             element = element.offsetParent;
+         }
+ 
+         return { x: xPosition, y: yPosition };
+     }
+     // alert(JSON.stringify(getPosition(element2)))
+ 
+     window.onload = addPageNumbers;
+     function addPageNumbers() {
+         var totalPages = Math.ceil(document.body.scrollHeight / 800);  //842px A4 pageheight for 72dpi, 1123px A4 pageheight for 96dpi,
+         for (var i = 1; i <= totalPages; i++) {
+             var pageNumberDiv = document.createElement("div");
+             var pageNumber = document.createTextNode("Page " + i + " of " + totalPages);
+             pageNumberDiv.style.position = "absolute";
+ 
+             if (i == 1) {
+                 pageNumberDiv.style.top = "calc((" + i + " * (279mm - 0.5px)) - 900px)";
+             }
+             if (i == 2) {
+                 pageNumberDiv.style.top = "calc((" + i + " * (274.4mm - 0.5px)) - 900px)";
+ 
+             }
+             if (i == 3) {
+                 pageNumberDiv.style.top = "calc((" + i + " * (272.8mm - 0.5px)) - 900px)";
+ 
+             }
+             if (i == 4) {
+                 pageNumberDiv.style.top = "calc((" + i + " * (272.4mm - 0.5px)) - 900px)";
+ 
+             }
+             if (i == 5) {
+                 pageNumberDiv.style.top = "calc((" + i + " * (272.2mm - 0.5px)) - 900px)";
+ 
+             }
+             if (i == 6) {
+                 pageNumberDiv.style.top = "calc((" + i + " * (271.7mm - 0.5px)) - 900px)";
+ 
+             }
+             if (i == 7) {
+                 pageNumberDiv.style.top = "calc((" + i + " * (271.6mm - 0.5px)) - 900px)";
+ 
+             }
+             if (i == 8) {
+                 pageNumberDiv.style.top = "calc((" + i + " * (271.5mm - 0.5px)) - 900px)";
+ 
+             }
+             if (i == 9) {
+                 pageNumberDiv.style.top = "calc((" + i + " * (271.4mm - 0.5px)) - 900px)";
+             }
+             if (i == 10) {
+                 pageNumberDiv.style.top = "calc((" + i + " * (271.3mm - 0.5px)) - 900px)";
+             }
+             if (i == 11) {
+                 pageNumberDiv.style.top = "calc((" + i + " * (272.3mm - 0.5px)) - 900px)";
+             }
+             if (i == 12) {
+                 pageNumberDiv.style.top = "calc((" + i + " * (272.1mm - 0.5px)) - 900px)";
+             }
+             if (i == 13) {
+                 pageNumberDiv.style.top = "calc((" + i + " * (272mm - 0.5px)) - 900px)";
+             }
+             if (i == 14) {
+                 pageNumberDiv.style.top = "calc((" + i + " * (271.9mm - 0.5px)) - 900px)";
+             }
+             if (i == 15) {
+                 pageNumberDiv.style.top = "calc((" + i + " * (271.8mm - 0.5px)) - 900px)";
+             }
+             if (i == 16) {
+                 pageNumberDiv.style.top = "calc((" + i + " * (271.7mm - 0.5px)) - 900px)";
+             }
+             if (i == 17) {
+                 pageNumberDiv.style.top = "calc((" + i + " * (271.7mm - 0.5px)) - 900px)";
+             }
+             if (i == 18) {
+                 pageNumberDiv.style.top = "calc((" + i + " * (271.6mm - 0.5px)) - 900px)";
+             }
+             if (i == 19) {
+                 pageNumberDiv.style.top = "calc((" + i + " * (271.5mm - 0.5px)) - 900px)";
+             }
+             if (i == 20) {
+                 pageNumberDiv.style.top = "calc((" + i + " * (271.47mm - 0.5px)) - 900px)";
+             }
+             if (i == 21) {
+                 pageNumberDiv.style.top = "calc((" + i + " * (271.4mm - 0.5px)) - 900px)";
+             }
+             if (i == 22) {
+                 pageNumberDiv.style.top = "calc((" + i + " * (271.4mm - 0.5px)) - 900px)";
+             }
+             if (i == 23) {
+                 pageNumberDiv.style.top = "calc((" + i + " * (271.37mm - 0.5px)) - 900px)";
+             }
+             if (i == 24) {
+                 pageNumberDiv.style.top = "calc((" + i + " * (271.33mm - 0.5px)) - 900px)";
+             }
+             if (i == 25) {
+                 pageNumberDiv.style.top = "calc((" + i + " * (271.28mm - 0.5px)) - 900px)";
+             }
+             if (i == 26) {
+                 pageNumberDiv.style.top = "calc((" + i + " * (271.24mm - 0.5px)) - 900px)";
+             }
+             if (i == 27) {
+                 pageNumberDiv.style.top = "calc((" + i + " * (271.22mm - 0.5px)) - 900px)";
+             }
+             if (i == 28) {
+                 pageNumberDiv.style.top = "calc((" + i + " * (271.20mm - 0.5px)) - 900px)";
+             }
+             if (i == 29) {
+                 pageNumberDiv.style.top = "calc((" + i + " * (271.18mm - 0.5px)) - 900px)";
+             }
+             if (i == 30) {
+                 pageNumberDiv.style.top = "calc((" + i + " * (271.16mm - 0.5px)) - 900px)";
+             }
+             if (i == 31) {
+                 pageNumberDiv.style.top = "calc((" + i + " * (271.14mm - 0.5px)) - 900px)";
+             }
+ 
+             pageNumberDiv.style.height = "25px";
+             pageNumberDiv.appendChild(pageNumber);
+             document.body.insertBefore(pageNumberDiv, document.getElementById("content"));
+             pageNumberDiv.style.right = "55px";
+         }
+     }
+ 
+ 
+ 
+ </script>
+ 
+ <style>
+     @page {
+         size: A4;
+         margin-top: 50px;
+         margin-bottom: 50px;
+     }
+ </style>
+ <script>
+ 
+     $("body .totalCount").each(function (i) {
+         // alert(i);
+         $("p").append(i + 1);
+     });
+ 
+ </script>
+
+</html>
